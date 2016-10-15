@@ -13,7 +13,7 @@ import java.util.*;
  *
  * @author TESLA_CN
  */
-public class CalculatorOperation {
+public class Algorithm {
 
     private final Stack<Double> number = new Stack<>();
     private final Stack<String> symbol = new Stack<>();
@@ -21,7 +21,7 @@ public class CalculatorOperation {
 
     private String expr;
 
-    public CalculatorOperation(String expression) {
+    public Algorithm(String expression) {
         expr = expression;
         symbol.push("#");
         cmp.put("+", 1);

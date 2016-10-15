@@ -5,8 +5,6 @@ package CalculatorPackage;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.util.Stack;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -150,40 +148,32 @@ public class CalculatorDemo extends Application {
         for (int i = 0; i < btNumber.length; i++) {
             final int temp = i;
             btNumber[i].setOnAction(e -> {
-                cleanNext();
-                recordPreviousAction();
+                handleNewInput();
                 expression.setText(expression.getText() + temp);
             });
         }
         btAdd.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.PLUS);
         });
         btSubtract.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.SUBSTRAC);
         });
         btMultiply.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.MULTIPLY);
         });
         btDivide.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.DIVIDE);
         });
         btDot.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + '.');
         });
         btEquals.setOnAction(e -> {
-            CalculatorOperation cal = new CalculatorOperation(expression.getText() + Config.END);
-            answer.setText(cal.getAnswer().toString());
-            Config.previousAnswer = cal.getAnswer();
+            printAnswer();
         });
 
         btPrevious.setOnAction(e -> {
@@ -196,8 +186,7 @@ public class CalculatorDemo extends Application {
             allClear();
         });
         btPreviousAns.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.ANS);
         });
 
@@ -210,9 +199,7 @@ public class CalculatorDemo extends Application {
             System.out.println(key + "==" + e.getCode().getName());
             switch (code) {
                 case "Enter":
-                    CalculatorOperation cal = new CalculatorOperation(expression.getText() + Config.END);
-                    answer.setText(cal.getAnswer().toString());
-                    Config.previousAnswer = cal.getAnswer();
+                    printAnswer();
                     break;
 
                 case "Right":
@@ -239,45 +226,36 @@ public class CalculatorDemo extends Application {
                 case "9":
                 case "0":
                 case ".":
-                    cleanNext();
-                    recordPreviousAction();
+                    handleNewInput();
                     expression.setText(expression.getText() + e.getText());
                     break;
 
                 case "+":
-                    cleanNext();
-                    recordPreviousAction();
+                    handleNewInput();
                     expression.setText(expression.getText() + Config.PLUS);
                     break;
                 case "-":
-                    cleanNext();
-                    recordPreviousAction();
+                    handleNewInput();
                     expression.setText(expression.getText() + Config.SUBSTRAC);
                     break;
                 case "*":
-                    cleanNext();
-                    recordPreviousAction();
+                    handleNewInput();
                     expression.setText(expression.getText() + Config.MULTIPLY);
                     break;
                 case "/":
-                    cleanNext();
-                    recordPreviousAction();
+                    handleNewInput();
                     expression.setText(expression.getText() + Config.DIVIDE);
                     break;
                 case "=":
-                    CalculatorOperation cal = new CalculatorOperation(expression.getText() + Config.END);
-                    answer.setText(cal.getAnswer().toString());
-                    Config.previousAnswer = cal.getAnswer();
+                    printAnswer();
                     break;
 
                 case "(":
-                    cleanNext();
-                    recordPreviousAction();
+                    handleNewInput();
                     expression.setText(expression.getText() + Config.LEFT_BRACKET);
                     break;
                 case ")":
-                    cleanNext();
-                    recordPreviousAction();
+                    handleNewInput();
                     expression.setText(expression.getText() + Config.RIGHT_BRACKET);
                     break;
 
@@ -286,12 +264,31 @@ public class CalculatorDemo extends Application {
 
     }
 
+    private void printAnswer() {
+        ExpressionHandler cal = new ExpressionHandler(expression.getText() + Config.END);
+        answer.setText(cal.getAnswer().toString());
+        Config.previousAnswer = cal.getAnswer();
+    }
+
+    //清除所有内容
+    private void allClear() {
+        expression.setText("");
+        answer.setText("");
+        previous.removeAllElements();
+        cleanNext();
+    }
+
     //从此处开始实现撤销与恢复功能
     //若表达式内输入新的内容,反撤销功能关闭
     private Boolean allowNext = false;
 
     private final Stack<String> previous = new Stack<>();//用于保存撤销的行为
     private final Stack<String> next = new Stack<>();//用于保存反撤销
+
+    private void handleNewInput() {
+        cleanNext();
+        recordPreviousAction();
+    }
 
     //记录并使输入行为入栈,以便于撤销
     private void recordPreviousAction() {
@@ -325,14 +322,6 @@ public class CalculatorDemo extends Application {
         }
     }
     //以上方法实现撤销与恢复功能
-
-    //清除所有内容
-    private void allClear() {
-        expression.setText("");
-        answer.setText("");
-        previous.removeAllElements();
-        cleanNext();
-    }
 
     private final GridPane seniorKeyBoard = new GridPane();
 
@@ -376,59 +365,51 @@ public class CalculatorDemo extends Application {
 
     private void setSeniorAction() {
         btLeftBracket.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.LEFT_BRACKET);
         });
         btRightBracket.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.RIGHT_BRACKET);
         });
         btQuadratic.setOnAction(e -> {
-            cleanNext();
+            handleNewInput();
 
         });
         btPower.setOnAction(e -> {
-            cleanNext();
+            handleNewInput();
 
         });
         btSin.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.SIN);
         });
         btCos.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.COS);
         });
         btTan.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.TAN);
         });
         btAbs.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.ABS);
         });
         btLog.setOnAction(e -> {
-            cleanNext();
+            handleNewInput();
 
         });
         btLn.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+            handleNewInput();
             expression.setText(expression.getText() + Config.LN);
         });
         btRadical.setOnAction(e -> {
-            cleanNext();
-
+            handleNewInput();
+            
         });
-        btPi.setOnAction(e -> {
-            cleanNext();
-            recordPreviousAction();
+        btPi.setOnAction(e -> {  
+            handleNewInput();
             expression.setText(expression.getText() + Config.PI);
         });
     }
