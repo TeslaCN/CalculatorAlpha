@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author TESLA_CN
  */
-public class CalculatorDemo extends Application {
+public class Interface extends Application {
 
     //由于大多数引用不改变,因此设为final
     private static final Config CONFIG = new Config();
