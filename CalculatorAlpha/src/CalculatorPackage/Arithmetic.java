@@ -13,7 +13,13 @@ public class Arithmetic {
     
     private String expr;
     
+    private Double ans;
+    
     public Arithmetic(String expression) {
         
+    }
+    
+    public Double getAnswer() {
+        return ans;
     }
 }
