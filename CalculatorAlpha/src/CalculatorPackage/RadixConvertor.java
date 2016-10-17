@@ -9,11 +9,13 @@ package CalculatorPackage;
  *
  * @author TESLA_CN
  */
-public class Arithmetic {
-    
-    private String expr;
-    
-    public Arithmetic(String expression) {
+public class RadixConvertor {
+   
+    public RadixConvertor(String expression, Integer radix) {
         
+    }
+    
+    public String getDecimalExpression() {
+        return null;
     }
 }

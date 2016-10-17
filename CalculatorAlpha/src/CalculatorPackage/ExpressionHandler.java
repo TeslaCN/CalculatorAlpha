@@ -17,7 +17,9 @@ public class ExpressionHandler {
         this.expression = expression;
     }
     
-    public Double getAnswer() {
+    public Double getDecimalAnswer() {
         return new Algorithm(expression).getAnswer();
     }
+    
+    
 }

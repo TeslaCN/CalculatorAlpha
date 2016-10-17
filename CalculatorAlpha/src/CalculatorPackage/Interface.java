@@ -266,8 +266,8 @@ public class Interface extends Application {
 
     private void printAnswer() {
         ExpressionHandler cal = new ExpressionHandler(expression.getText() + Config.END);
-        answer.setText(cal.getAnswer().toString());
-        Config.previousAnswer = cal.getAnswer();
+        answer.setText(cal.getDecimalAnswer().toString());
+        Config.previousAnswer = cal.getDecimalAnswer();
     }
 
     //清除所有内容
