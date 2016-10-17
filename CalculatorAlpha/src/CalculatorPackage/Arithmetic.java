@@ -15,6 +15,10 @@ public class Arithmetic {
     
     private Double ans;
     
+    /**
+     *
+     * @param expression sin ( ±Ì¥Ô Ω )
+     */
     public Arithmetic(String expression) {
         
     }
