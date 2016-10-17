@@ -80,6 +80,9 @@ public class Algorithm {
                     subExpression.append(temp).append(" ");
                     temp=expression.next();
                 } while (parenthesesStack>0);
+                Arithmetic subResult=new Arithmetic(subExpression);
+                Double temp_num = subResult.getAnswer();
+                number.push(temp_num);
             }
         }
         return number.peek();
