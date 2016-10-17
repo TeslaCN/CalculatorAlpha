@@ -47,9 +47,12 @@ public class Algorithm {
         while (!("#".equals(temp)) || !("#".equals(symbol.peek()))) {
             //System.out.println("temp="+temp+"  symbol.peek="+symbol.peek());
             //System.out.println("symbol's peek is "+symbol.peek());
-            if (Character.isDigit(temp.charAt(0))) {
-                Double temp_num = Double.parseDouble(temp);
-                number.push(temp_num);
+            if (Character.isDigit(temp.charAt(0))||temp.charAt(0)=='¦Ð') {
+                if (temp.charAt(0)=='¦Ð') number.push(Math.PI);
+                else {
+                    Double temp_num = Double.parseDouble(temp);
+                    number.push(temp_num);
+                }
                 temp = expression.next();
             } else//
             if (cmp.get(symbol.peek()) < cmp.get(temp)) {
@@ -73,7 +76,7 @@ public class Algorithm {
                 StringBuilder subExpression=new StringBuilder();
                 subExpression.append(temp).append(" ");
                 temp=expression.next();
-                int parenthesesStack=0;
+                int parenthesesStack=0;//À¨ºÅÆ¥Åä
                 do {                    
                     if (temp.equals("(")) parenthesesStack++;
                     else if (temp.equals(")")) parenthesesStack--;
