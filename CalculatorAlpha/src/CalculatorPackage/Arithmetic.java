@@ -16,13 +16,16 @@ public class Arithmetic {
     private Double ans;
     
     /**
-     *
+     * 
      * @param expression sin ( 表达式 )
      */
     public Arithmetic(String expression) {
         
     }
-    
+     /**
+     * 
+     * @return 算数值
+     */
     public Double getAnswer() {
         return ans;
     }
