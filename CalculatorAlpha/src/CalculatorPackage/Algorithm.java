@@ -10,8 +10,9 @@ package CalculatorPackage;
 import java.util.*;
 
 /**
- *
- * @author TESLA_CN
+ * Double getAnswer() 返回表达式的运算结果
+ * Algorithm(String 表达式) 构造方法
+ * 
  */
 public class Algorithm {
 
@@ -20,7 +21,10 @@ public class Algorithm {
     private static final Map<String, Integer> cmp = new HashMap<>();
 
     private String expr;
-
+/**
+ * 
+ * @param String 表达式 
+ */
     public Algorithm(String expression) {
         expr = expression;
         symbol.push("#");
@@ -63,8 +67,20 @@ public class Algorithm {
             } else if ("(".equals(symbol.peek())) {
                 symbol.push(temp);
                 temp = expression.next();
-            } //如果这里是sin,cos,则创建一个新符号栈和一个新的数字栈,然后solve(新数字栈,新符号栈)
+            } else{
+            //如果这里是sin,cos,则创建一个新符号栈和一个新的数字栈,然后solve(新数字栈,新符号栈)
             //并将返回值push到原有的number栈里面
+                StringBuilder subExpression=new StringBuilder();
+                subExpression.append(temp).append(" ");
+                temp=expression.next();
+                int parenthesesStack=0;
+                do {                    
+                    if (temp.equals("(")) parenthesesStack++;
+                    else if (temp.equals(")")) parenthesesStack--;
+                    subExpression.append(temp).append(" ");
+                    temp=expression.next();
+                } while (parenthesesStack>0);
+            }
         }
         return number.peek();
     }
@@ -84,6 +100,7 @@ public class Algorithm {
                 return 0.0;
         }
     }
+    
 
     public static void main(String[] args) {
 
