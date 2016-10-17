@@ -337,6 +337,9 @@ public class Interface extends Application {
     private final Button btLn = new Button("ln()");
     private final Button btRadical = new Button("¡Ì()");
     private final Button btPi = new Button("¦Ð");
+    private final Button btArcSin = new Button("arcsin");
+    private final Button btArcCos = new Button("arccos");
+    private final Button btArcTan = new Button("arctan");
 
     private void initializeSeniorFunction() {
 
@@ -357,10 +360,13 @@ public class Interface extends Application {
         btLn.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btRadical.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btPi.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btArcSin.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btArcCos.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btArcTan.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
 
-        seniorKeyBoard.addRow(0, btAbs, btLeftBracket, btRightBracket);
-        seniorKeyBoard.addRow(1, btQuadratic, btPower, btRadical, btLog, btLn);
-        seniorKeyBoard.addRow(2, btSin, btCos, btTan, btPi);
+        seniorKeyBoard.addRow(0, btAbs, btLeftBracket, btRightBracket, btLog, btLn);
+        seniorKeyBoard.addRow(1, btQuadratic, btPower, btRadical, btPi, btSin);
+        seniorKeyBoard.addRow(2, btCos, btTan, btArcSin, btArcCos, btArcTan);
     }
 
     private void setSeniorAction() {
@@ -411,6 +417,18 @@ public class Interface extends Application {
         btPi.setOnAction(e -> {  
             handleNewInput();
             expression.setText(expression.getText() + Config.PI);
+        });
+        btArcSin.setOnAction(e -> {
+            handleNewInput();
+            expression.setText(expression.getText() + Config.ASIN);
+        });
+        btArcCos.setOnAction(e -> {
+            handleNewInput();
+            expression.setText(expression.getText() + Config.ACOS);
+        });
+        btArcTan.setOnAction(e -> {
+            handleNewInput();
+            expression.setText(expression.getText() + Config.ATAN);
         });
     }
 
