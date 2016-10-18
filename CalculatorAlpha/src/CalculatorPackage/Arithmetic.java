@@ -32,7 +32,7 @@ public class Arithmetic {
         String e = input.nextLine();
         switch (operation) {
             case "sin":
-                ans = handleSin(e);
+                ans = handleTrigonometric(e, operation);
                 break;
             case "cos":
             case "tan":
@@ -46,11 +46,20 @@ public class Arithmetic {
         }
     }
 
-    public static Double handleSin(String expression) {
+    public static Double handleTrigonometric(String expression, String operation) {
         Double result = new Algorithm(expression + Config.END).getAnswer();
-        return Math.sin(Math.toDegrees(result));
+        switch(operation) {
+            case "sin": return Math.sin(Math.PI * result / 180);
+            case "cos": return Math.cos(Math.PI * result / 180);
+            case "tan": return Math.cos(Math.PI * result / 180);
+            case "arcsin" : return Math.asin(Math.PI * result / 180);
+            case "arccos" : return Math.acos(Math.PI * result / 180);
+            case "arctan" : return Math.atan(Math.PI * result / 180);
+        }
+        return 0.0;
     }
 
+    
     /**
      *
      * @return À„ ˝÷µ
@@ -60,12 +69,11 @@ public class Arithmetic {
     }
 
     public static void main(String[] args) {
-        String expression = " sin ( 30 + 60 ) ";
+        String expression = " sin ( 30 + 60 * sin ( 30 ) ) ";
         Arithmetic test = new Arithmetic(expression);
         System.out.println(test.getAnswer());
         Algorithm testAl = new Algorithm(expression + Config.END);
         Double r = testAl.getAnswer();
         System.out.println(r);
-
     }
 }
