@@ -6,6 +6,7 @@
 package CalculatorPackage;
 
 import java.util.Scanner;
+import java.util.Stack;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -49,7 +50,10 @@ public class Arithmetic {
             case "abs":
             case "ln":
             case "¡Ì":
-                ans = handlePower(e, operation);
+                ans = handleFunction(e, operation);
+                break;
+            case "power":
+                
                 break;
             default:
         }
@@ -80,7 +84,7 @@ public class Arithmetic {
         return Math.PI * result / 180;
     }
 
-    public static Double handlePower(String expression, String operation) {
+    public static Double handleFunction(String expression, String operation) {
         Double result = new Algorithm(expression + Config.END).getAnswer();
         switch (operation) {
             case "abs":
@@ -92,6 +96,13 @@ public class Arithmetic {
             case "log":
                 
         }
+        return 0.0;
+    }
+    
+    public static Double handlePower(String expression, String index) {
+        Stack<String> brackets = new Stack<>();
+        Scanner in = new Scanner(expression);
+        
         return 0.0;
     }
 
@@ -118,8 +129,5 @@ public class Arithmetic {
         Algorithm testAl = new Algorithm(expression + Config.END);
         Double r = testAl.getAnswer();
         System.out.println(r);
-        Scanner in = new Scanner("-12");
-        Double a = Double.parseDouble(in.next());
-        System.out.println(a);
     }
 }
