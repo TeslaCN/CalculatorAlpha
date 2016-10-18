@@ -5,6 +5,8 @@
  */
 package CalculatorPackage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -12,6 +14,8 @@ import java.util.Scanner;
  * 由于一个人对错误情况的判断情况可能不全,所以这部分代码大家一起补充(记得写好注释)
  */
 public class LegitimacyDetection {
+    private static final Map<String, Integer> CMP = new HashMap<>();
+    
     //表达式
     private String expression;
     //表达式的合法性
@@ -24,7 +28,8 @@ public class LegitimacyDetection {
     public boolean isLeagel(){
         //这里添加各种检测方法
         checkParentheses();
-        
+        checkNumber();
+        checkOperator();
         //...
         return leagel;
     }
@@ -44,6 +49,41 @@ public class LegitimacyDetection {
         if(parenthesesStack!=0) leagel=false;
     }
     
+     /**
+     * 情况2:数字合法性检测
+     * 防止出现:
+     *      数字包含一个以上的小数点
+     *      数字包含除 "数字" 和 "." 之外的其它字符
+     */   
+    private void checkNumber(){
+        Scanner exp=new Scanner(expression);
+        String temp = exp.next();
+        do {
+            if (Character.isDigit(temp.charAt(0))) {
+                boolean radixPoint = true;
+                for (int i = 0; i < temp.length(); i++) {
+                    if (Character.isDigit(temp.charAt(i)));
+                    else if (temp.charAt(i)=='.'&&radixPoint)radixPoint=false;
+                    else {
+                        radixPoint=false;
+                        leagel=false;
+                    }
+                }
+            }
+        } while (!temp.equals("#"));
+    }
+    
+     /**
+     * 情况3:运算符搭配合法性检测
+     * 防止出现:
+     *      +-,++,**,(+,-),...等非法搭配出现
+     *      由于运算字符是通过界面输入,所以字符的合法性可不必检测,只需关注搭配问题
+     */    
+    private void checkOperator(){
+        //待完善
+        //...
+    }
+}
     
     
     
