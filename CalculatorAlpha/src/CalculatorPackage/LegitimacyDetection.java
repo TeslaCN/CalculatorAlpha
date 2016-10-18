@@ -69,6 +69,7 @@ public class LegitimacyDetection {
                         leagel=false;
                     }
                 }
+                if (temp.charAt(temp.length()-1)=='.') leagel=false;
             }
         } while (!temp.equals("#"));
     }
