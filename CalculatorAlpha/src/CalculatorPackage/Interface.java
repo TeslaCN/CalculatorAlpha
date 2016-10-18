@@ -150,44 +150,55 @@ public class Interface extends Application {
             btNumber[i].setOnAction(e -> {
                 handleNewInput();
                 expression.setText(expression.getText() + temp);
+                buttonPressed();
             });
         }
         btAdd.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.PLUS);
+            buttonPressed();
         });
         btSubtract.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.SUBSTRAC);
+            buttonPressed();
         });
         btMultiply.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.MULTIPLY);
+            buttonPressed();
         });
         btDivide.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.DIVIDE);
+            buttonPressed();
         });
         btDot.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + '.');
+            buttonPressed();
         });
         btEquals.setOnAction(e -> {
             printAnswer();
+            buttonPressed();
         });
 
         btPrevious.setOnAction(e -> {
             returnPrevious();
+            buttonPressed();
         });
         btNext.setOnAction(e -> {
             returnNext();
+            buttonPressed();
         });
         btAC.setOnAction(e -> {
             allClear();
+            buttonPressed();
         });
         btPreviousAns.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.ANS);
+            buttonPressed();
         });
 
         expression.setOnKeyPressed(e -> {
@@ -289,7 +300,7 @@ public class Interface extends Application {
         cleanNext();
         recordPreviousAction();
     }
-    
+
     private void buttonPressed() {
         expression.requestFocus();
     }
@@ -377,62 +388,77 @@ public class Interface extends Application {
         btLeftBracket.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.LEFT_BRACKET);
+            buttonPressed();
         });
         btRightBracket.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.RIGHT_BRACKET);
+            buttonPressed();
         });
         btQuadratic.setOnAction(e -> {
             handleNewInput();
 
+            buttonPressed();
         });
         btPower.setOnAction(e -> {
             handleNewInput();
 
+            buttonPressed();
         });
         btSin.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.SIN);
+            buttonPressed();
         });
         btCos.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.COS);
+            buttonPressed();
         });
         btTan.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.TAN);
+            buttonPressed();
         });
         btAbs.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.ABS);
+            buttonPressed();
         });
         btLog.setOnAction(e -> {
             handleNewInput();
 
+            buttonPressed();
         });
         btLn.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.LN);
+            buttonPressed();
         });
         btRadical.setOnAction(e -> {
             handleNewInput();
-            
+
+            buttonPressed();
         });
-        btPi.setOnAction(e -> {  
+        btPi.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.PI);
+            buttonPressed();
         });
         btArcSin.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.ASIN);
+            buttonPressed();
         });
         btArcCos.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.ACOS);
+            buttonPressed();
         });
         btArcTan.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.ATAN);
+            buttonPressed();
         });
     }
 
