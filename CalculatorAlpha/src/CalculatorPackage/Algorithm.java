@@ -45,45 +45,47 @@ public class Algorithm {
         Scanner expression = new Scanner(expr);
         String temp = expression.next();
         while (!("#".equals(temp)) || !("#".equals(symbol.peek()))) {
-            //System.out.println("temp="+temp+"  symbol.peek="+symbol.peek());
-            //System.out.println("symbol's peek is "+symbol.peek());
-            if (Character.isDigit(temp.charAt(0))||temp.charAt(0)=='π') {
-                if (temp.charAt(0)=='π') number.push(Math.PI);
-                else {
+            if (Character.isDigit(temp.charAt(0)) || temp.charAt(0) == 'π') {
+                if (temp.charAt(0) == 'π') {
+                    number.push(Math.PI);
+                } else {
                     Double temp_num = Double.parseDouble(temp);
                     number.push(temp_num);
                 }
                 temp = expression.next();
-            } else//
-            if (cmp.get(symbol.peek()) < cmp.get(temp)) {
-                symbol.push(temp);
-                temp = expression.next();
-            } else if (cmp.get(symbol.peek()) + cmp.get(temp) == 0) {
-                symbol.pop();
-                temp = expression.next();
-            } else if ("+".equals(symbol.peek()) || "-".equals(symbol.peek()) || "*".equals(symbol.peek()) || "/".equals(symbol.peek())) {
-                Double b = number.pop();
-                Double a = number.pop();
-                String suanzi = symbol.pop();
-                number.push(calculate(a, suanzi, b));
-                //System.out.println(i+"此时栈顶优先级高,弹出栈");
-            } else if ("(".equals(symbol.peek())) {
-                symbol.push(temp);
-                temp = expression.next();
-            } else{
-            //如果这里是sin,cos,则创建一个新符号栈和一个新的数字栈,然后solve(新数字栈,新符号栈)
-            //并将返回值push到原有的number栈里面
-                StringBuilder subExpression=new StringBuilder();
+            } else if (temp.equals("#")||temp.equals("+")||temp.equals("-")||
+                    temp.equals("*")||temp.equals("/")||temp.equals("(")||temp.equals(")")) {
+                if (cmp.get(symbol.peek()) < cmp.get(temp)) {
+                    symbol.push(temp);
+                    temp = expression.next();
+                } else if (cmp.get(symbol.peek()) + cmp.get(temp) == 0) {
+                    symbol.pop();
+                    temp = expression.next();
+                } else if ("+".equals(symbol.peek()) || "-".equals(symbol.peek()) || "*".equals(symbol.peek()) || "/".equals(symbol.peek())) {
+                    Double b = number.pop();
+                    Double a = number.pop();
+                    String suanzi = symbol.pop();
+                    number.push(calculate(a, suanzi, b));
+                    //System.out.println(i+"此时栈顶优先级高,弹出栈");
+                } else if ("(".equals(symbol.peek())) {
+                    symbol.push(temp);
+                    temp = expression.next();
+                }
+            } else {
+                StringBuilder subExpression = new StringBuilder();
                 subExpression.append(temp).append(" ");
-                temp=expression.next();
-                int parenthesesStack=0;//括号匹配
+                temp = expression.next();
+                int parenthesesStack = 0;//括号匹配
                 do {                    
-                    if (temp.equals("(")) parenthesesStack++;
-                    else if (temp.equals(")")) parenthesesStack--;
+                    if (temp.equals("(")) {
+                        parenthesesStack++;
+                    } else if (temp.equals(")")) {
+                        parenthesesStack--;
+                    }
                     subExpression.append(temp).append(" ");
-                    temp=expression.next();
-                } while (parenthesesStack>0);
-                Arithmetic subResult=new Arithmetic(subExpression.toString());
+                    temp = expression.next();
+                } while (parenthesesStack > 0);
+                Arithmetic subResult = new Arithmetic(subExpression.toString());
                 number.push(subResult.getAnswer());
             }
         }
