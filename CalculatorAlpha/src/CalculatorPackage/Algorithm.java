@@ -46,7 +46,7 @@ public class Algorithm {
         Scanner expression = new Scanner(expr);
         String temp = expression.next();
         while (!("#".equals(temp)) || !("#".equals(symbol.peek()))) {
-            if (Character.isDigit(temp.charAt(0)) || temp.charAt(0) == '¦Ð') {
+            if (temp.matches("[+-]?\\d.*") || temp.charAt(0) == '¦Ð') {
                 if (temp.charAt(0) == '¦Ð') {
                     number.push(Math.PI);
                 } else {
