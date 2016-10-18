@@ -37,6 +37,7 @@ public class Config {
     public static final String ASIN = " arcsin ( ";
     public static final String ACOS = " arccos ( ";
     public static final String ATAN = " arctan ( ";
+    public static final String DEGREE = " degree ( ";
     
     public static final String ABS = " abs ( ";
     public static final String LN = " ln ( ";

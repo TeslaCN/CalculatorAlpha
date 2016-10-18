@@ -137,11 +137,11 @@ public class Interface extends Application {
         expression.setPrefRowCount(3);
         expression.setWrapText(true);
         expression.setEditable(false);
-        expression.setPromptText("Type here");
+        expression.setPromptText("Here is the expression");
         answer.setPrefWidth(basicKeyBoard.getWidth());
         answer.setAlignment(Pos.CENTER_RIGHT);
         answer.setEditable(false);
-        answer.setPromptText("The answer will be displayed to here");
+        answer.setPromptText("The answer will be display here");
     }
 
     private void setBasicAction() {
@@ -348,13 +348,14 @@ public class Interface extends Application {
     private final Button btCos = new Button("cos");
     private final Button btTan = new Button("tan");
     private final Button btAbs = new Button("Abs");
-    private final Button btLog = new Button("log[()()]");
+    private final Button btLog = new Button("log(()())");
     private final Button btLn = new Button("ln()");
     private final Button btRadical = new Button("¡Ì()");
     private final Button btPi = new Button("¦Ð");
     private final Button btArcSin = new Button("arcsin");
     private final Button btArcCos = new Button("arccos");
     private final Button btArcTan = new Button("arctan");
+    private final Button btDegree = new Button("degree");
 
     private void initializeSeniorFunction() {
 
@@ -378,10 +379,12 @@ public class Interface extends Application {
         btArcSin.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btArcCos.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btArcTan.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btDegree.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
 
         seniorKeyBoard.addRow(0, btAbs, btLeftBracket, btRightBracket, btLog, btLn);
         seniorKeyBoard.addRow(1, btQuadratic, btPower, btRadical, btPi, btSin);
         seniorKeyBoard.addRow(2, btCos, btTan, btArcSin, btArcCos, btArcTan);
+        seniorKeyBoard.addRow(3, btDegree);
     }
 
     private void setSeniorAction() {
@@ -437,7 +440,7 @@ public class Interface extends Application {
         });
         btRadical.setOnAction(e -> {
             handleNewInput();
-
+            expression.setText(expression.getText() + Config.RADICAL);
             buttonPressed();
         });
         btPi.setOnAction(e -> {
@@ -458,6 +461,11 @@ public class Interface extends Application {
         btArcTan.setOnAction(e -> {
             handleNewInput();
             expression.setText(expression.getText() + Config.ATAN);
+            buttonPressed();
+        });
+        btDegree.setOnAction(e -> {
+            handleNewInput();
+            expression.setText(expression.getText() + Config.DEGREE);
             buttonPressed();
         });
     }

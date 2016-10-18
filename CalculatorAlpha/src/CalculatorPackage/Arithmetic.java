@@ -6,6 +6,10 @@
 package CalculatorPackage;
 
 import java.util.Scanner;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  *
@@ -31,6 +35,9 @@ public class Arithmetic {
         String operation = input.next();
         String e = input.nextLine();
         switch (operation) {
+            case "degree":
+                ans = toDegree(e);
+                break;
             case "sin":
             case "cos":
             case "tan":
@@ -42,6 +49,8 @@ public class Arithmetic {
             case "abs":
             case "ln":
             case "¡Ì":
+                ans = handlePower(e, operation);
+                break;
             default:
         }
     }
@@ -50,23 +59,41 @@ public class Arithmetic {
         Double result = new Algorithm(expression + Config.END).getAnswer();
         switch (operation) {
             case "sin":
-                return Math.sin(Math.PI * result / 180);
+                return Math.sin(result);
             case "cos":
-                return Math.cos(Math.PI * result / 180);
+                return Math.cos(result);
             case "tan":
-                return Math.cos(Math.PI * result / 180);
+                return Math.cos(result);
             case "arcsin":
-                return Math.asin(Math.PI * result / 180);
+                return Math.asin(result);
             case "arccos":
-                return Math.acos(Math.PI * result / 180);
+                return Math.acos(result);
             case "arctan":
-                return Math.atan(Math.PI * result / 180);
+                return Math.atan(result);
             default:
                 return 0.0;
         }
     }
     
-//    public static Double handle
+    public static Double toDegree(String expression) {
+        Double result = new Algorithm(expression + Config.END).getAnswer();
+        return Math.PI * result / 180;
+    }
+
+    public static Double handlePower(String expression, String operation) {
+        Double result = new Algorithm(expression + Config.END).getAnswer();
+        switch (operation) {
+            case "abs":
+                return Math.abs(result);
+            case "ln":
+                return Math.log(result);
+            case "¡Ì":
+                return Math.sqrt(result);
+            case "log":
+                
+        }
+        return 0.0;
+    }
 
     /**
      *
@@ -75,13 +102,24 @@ public class Arithmetic {
     public Double getAnswer() {
         return ans;
     }
+    
+    private void error(String err) {
+        Stage stage = new Stage();
+        Text text = new Text(err);
+        Button btContinue = new Button("Continue");
+        VBox pane = new VBox();
+        pane.getChildren().addAll(text, btContinue);
+    }
 
     public static void main(String[] args) {
-        String expression = " sin ( 30 + 60 * arcsin ( 30 ) ) ";
+        String expression = " sin ( degree ( 30 ) ) ";
         Arithmetic test = new Arithmetic(expression);
         System.out.println(test.getAnswer());
         Algorithm testAl = new Algorithm(expression + Config.END);
         Double r = testAl.getAnswer();
         System.out.println(r);
+        Scanner in = new Scanner("-12");
+        Double a = Double.parseDouble(in.next());
+        System.out.println(a);
     }
 }
