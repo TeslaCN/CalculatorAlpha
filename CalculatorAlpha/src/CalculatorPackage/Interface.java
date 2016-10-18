@@ -289,6 +289,10 @@ public class Interface extends Application {
         cleanNext();
         recordPreviousAction();
     }
+    
+    private void buttonPressed() {
+        expression.requestFocus();
+    }
 
     //记录并使输入行为入栈,以便于撤销
     private void recordPreviousAction() {
