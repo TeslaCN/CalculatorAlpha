@@ -28,6 +28,7 @@ public class Algorithm {
     public Algorithm(String expression) {
         expr = expression;
         symbol.push("#");
+        number.push(0.0);
         cmp.put("+", 1);
         cmp.put("-", 1);
         cmp.put("*", 10);
