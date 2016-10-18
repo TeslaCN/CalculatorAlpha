@@ -41,6 +41,8 @@ public class Config {
     public static final String ABS = " abs ( ";
     public static final String LN = " ln ( ";
     
+    public static final String RADICAL = " ¡Ì ( ";
+    
     public static final String PI = " ¦Ð ";
     
     public static double previousAnswer;
