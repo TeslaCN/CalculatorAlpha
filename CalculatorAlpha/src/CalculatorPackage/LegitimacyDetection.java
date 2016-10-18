@@ -45,7 +45,7 @@ public class LegitimacyDetection {
            temp=exp.next();
             if (temp.equals("(")) parenthesesStack++;
             else if(temp.equals(")")) parenthesesStack--;
-        } while (!temp.equals("#"));
+        } while (!temp.equals("#")&&leagel);
         if(parenthesesStack!=0) leagel=false;
     }
     
@@ -54,6 +54,7 @@ public class LegitimacyDetection {
      * 防止出现:
      *      数字包含一个以上的小数点
      *      数字包含除 "数字" 和 "." 之外的其它字符
+     *      数字以 "." 结尾
      */   
     private void checkNumber(){
         Scanner exp=new Scanner(expression);
@@ -71,7 +72,7 @@ public class LegitimacyDetection {
                 }
                 if (temp.charAt(temp.length()-1)=='.') leagel=false;
             }
-        } while (!temp.equals("#"));
+        } while (!temp.equals("#")&&leagel);
     }
     
      /**
