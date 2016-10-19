@@ -54,8 +54,8 @@ public class RadixConvertor {
         return expression;
     }
     
-    public String getBinaryHexExpression(String expression,Integer radix) {
-        //获取二进制或八进制形式的表达式
+    public String DecimalToOthersExpression(String expression,Integer radix) {
+        //获取二进制，八进制或十六进制形式的表达式
         //radix 为目标转换数制
         Scanner in = new Scanner(expression);
         int number1 = in.nextInt();  //第一个运算数
@@ -69,7 +69,7 @@ public class RadixConvertor {
         public static void main(String args[]){
         String expression = "122 + 65535";
         RadixConvertor a = new RadixConvertor(expression,10);
-        expression = a.getBinaryHexExpression(expression,2);
+        expression = a.DecimalToOthersExpression(expression,2);
         System.out.println(expression);
     }
 
