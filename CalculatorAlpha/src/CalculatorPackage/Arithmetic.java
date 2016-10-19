@@ -176,8 +176,8 @@ public class Arithmetic {
     }
 
     public static void main(String[] args) {
-        String expression = " 99 + pow ( ( 4 ) ( 64 ) ) ";
-        ExpressionHandler testExp = new ExpressionHandler(expression + Config.END);
+        String expression = "pow ( ( 5 ) ( 4 ) ) + pow ( ( 5 ) ( 4 ) )  #";
+        ExpressionHandler testExp = new ExpressionHandler(expression);
         Double r = testExp.getDecimalAnswer();
         System.out.println(r);
     }

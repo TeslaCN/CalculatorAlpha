@@ -27,14 +27,14 @@ public class ExpressionHandler {
 
     private void pretreat() {
         Scanner in = new Scanner(expression);
-        boolean isPreviousSymbol = false;
+        boolean isPreviousOperator = false;
         while (in.hasNext()) {
             String temp = in.next();
-            if (isPreviousSymbol && (temp.equals("+") || temp.equals("-"))) {
+            if (isPreviousOperator && (temp.equals("+") || temp.equals("-"))) {
                 processed += temp;
                 processed += in.next() + " ";
             } else {
-                isPreviousSymbol = isSymbol(temp);
+                isPreviousOperator = isOperator(temp);
                 processed += temp + " ";
             }
         }
@@ -47,8 +47,8 @@ public class ExpressionHandler {
         return processed;
     }
 
-    public static boolean isSymbol(String object) {
-        return !Character.isDigit(object.charAt(0));
+    public static boolean isOperator(String object) {
+        return object.equals("+")||object.equals("-")||object.equals("*")||object.equals("/");
     }
 
     /**
@@ -62,7 +62,7 @@ public class ExpressionHandler {
     * @param args
      */
     public static void main(String[] args) {
-        ExpressionHandler test = new ExpressionHandler("854 + - 88 * - 751 * - 42 #");
+        ExpressionHandler test = new ExpressionHandler("pow ( ( 4 ) ( 5 ) ) + log ( ( 4 ) ( 64 ) )  #");
         System.out.println(test.getProcessed());
         System.out.println(test.getDecimalAnswer());
     }
