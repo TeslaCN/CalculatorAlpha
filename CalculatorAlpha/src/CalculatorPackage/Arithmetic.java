@@ -47,13 +47,18 @@ public class Arithmetic {
             case "arctan":
                 ans = handleTrigonometric(e, operation);
                 break;
+                
+            case "pow3":
+            case "pow2":
             case "abs":
+            case "log10":
             case "ln":
             case "¡Ì":
                 ans = handleFunction(e, operation);
                 break;
+
             case "power":
-                
+
                 break;
             default:
         }
@@ -78,7 +83,7 @@ public class Arithmetic {
                 return 0.0;
         }
     }
-    
+
     public static Double toDegree(String expression) {
         Double result = new Algorithm(expression + Config.END).getAnswer();
         return Math.PI * result / 180;
@@ -87,22 +92,43 @@ public class Arithmetic {
     public static Double handleFunction(String expression, String operation) {
         Double result = new Algorithm(expression + Config.END).getAnswer();
         switch (operation) {
+            case "pow3":
+                return Math.pow(result, 3);
+            case "pow2":
+                return Math.pow(result, 2);
             case "abs":
                 return Math.abs(result);
+            case "log10":
+                return Math.log10(result);
             case "ln":
                 return Math.log(result);
             case "¡Ì":
                 return Math.sqrt(result);
-            case "log":
-                
         }
         return 0.0;
     }
-    
-    public static Double handlePower(String expression, String index) {
+
+    public static Double handleBinaryOperator(String expression, String type, String indexExpr) {
         Stack<String> brackets = new Stack<>();
         Scanner in = new Scanner(expression);
-        
+        in.next();
+        brackets.push(in.next());
+        String base = "";
+        String index = "";
+        base += brackets.peek();
+        while(in.hasNext()) {
+            String temp = in.next();
+            if(temp.equals("(")) {
+                brackets.push(temp);
+            }
+            if(temp.equals(")")) {
+                brackets.pop();
+            }
+            if(brackets.empty()) {
+                
+            }
+            
+        }
         return 0.0;
     }
 
@@ -113,7 +139,7 @@ public class Arithmetic {
     public Double getAnswer() {
         return ans;
     }
-    
+
     private void error(String err) {
         Stage stage = new Stage();
         Text text = new Text(err);

@@ -281,7 +281,7 @@ public class Interface extends Application {
     
     private void printAnswer() {
         ExpressionHandler cal = new ExpressionHandler(expression.getText() + Config.END);
-        answer.setText(cal.getDecimalAnswer().toString());
+        answer.setText(String.format("%.10f", cal.getDecimalAnswer()));
         Config.previousAnswer = cal.getDecimalAnswer();
     }
 
@@ -346,13 +346,15 @@ public class Interface extends Application {
 
     private final Button btLeftBracket = new Button("(");
     private final Button btRightBracket = new Button(")");
-    private final Button btQuadratic = new Button("^2");
-    private final Button btPower = new Button("^");
+    private final Button btPower3 = new Button("Power3");
+    private final Button btPower2 = new Button("Power2");
+    private final Button btPower = new Button("Power(()())");
     private final Button btSin = new Button("sin");
     private final Button btCos = new Button("cos");
     private final Button btTan = new Button("tan");
     private final Button btAbs = new Button("Abs");
     private final Button btLog = new Button("log(()())");
+    private final Button btLog10 = new Button("log10");
     private final Button btLn = new Button("ln()");
     private final Button btRadical = new Button("¡Ì()");
     private final Button btPi = new Button("¦Ð");
@@ -370,13 +372,15 @@ public class Interface extends Application {
 
         btLeftBracket.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btRightBracket.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
-        btQuadratic.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btPower3.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btPower2.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btPower.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btSin.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btCos.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btTan.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btAbs.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btLog.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btLog10.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btLn.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btRadical.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btPi.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
@@ -386,7 +390,7 @@ public class Interface extends Application {
         btDegree.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
 
         seniorKeyBoard.addRow(0, btAbs, btLeftBracket, btRightBracket, btLog, btLn);
-        seniorKeyBoard.addRow(1, btQuadratic, btPower, btRadical, btPi, btSin);
+        seniorKeyBoard.addRow(1, btPower2, btPower, btRadical, btPi, btSin);
         seniorKeyBoard.addRow(2, btCos, btTan, btArcSin, btArcCos, btArcTan);
         seniorKeyBoard.addRow(3, btDegree);
     }
@@ -402,14 +406,19 @@ public class Interface extends Application {
             append(Config.RIGHT_BRACKET);
             buttonPressed();
         });
-        btQuadratic.setOnAction(e -> {
+        btPower3.setOnAction(e -> {
             handleNewInput();
-
+            append(Config.POWER3);
+            buttonPressed();
+        });
+        btPower2.setOnAction(e -> {
+            handleNewInput();
+            append(Config.POWER2);
             buttonPressed();
         });
         btPower.setOnAction(e -> {
             handleNewInput();
-
+            append(Config.POWER);
             buttonPressed();
         });
         btSin.setOnAction(e -> {
@@ -434,7 +443,12 @@ public class Interface extends Application {
         });
         btLog.setOnAction(e -> {
             handleNewInput();
-
+            append(Config.LOG);
+            buttonPressed();
+        });
+        btLog10.setOnAction(e -> {
+            handleNewInput();
+            append(Config.LOG10);
             buttonPressed();
         });
         btLn.setOnAction(e -> {
