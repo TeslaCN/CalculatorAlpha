@@ -17,6 +17,9 @@ public class ExpressionHandler {
 
     private String processed = "";
 
+    /**
+    * @param expression 获取原始表达式
+    */
     public ExpressionHandler(String expression) {
         this.expression = expression;
         pretreat();
@@ -37,6 +40,9 @@ public class ExpressionHandler {
         }
     }
 
+    /**
+    * @return String 已预处理表达式
+    */
     public String getProcessed() {
         return processed;
     }
@@ -45,10 +51,16 @@ public class ExpressionHandler {
         return !Character.isDigit(object.charAt(0));
     }
 
+    /**
+    * @return Double 已预处理表达式 的十进制运算结果
+     */
     public Double getDecimalAnswer() {
         return new Algorithm(processed).getAnswer();
     }
 
+    /**
+    * @param args
+     */
     public static void main(String[] args) {
         ExpressionHandler test = new ExpressionHandler("854 + - 88 * - 751 * - 42 #");
         System.out.println(test.getProcessed());

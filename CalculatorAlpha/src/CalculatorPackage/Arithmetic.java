@@ -86,6 +86,10 @@ public class Arithmetic {
         }
     }
 
+    /**
+    * @param expression 弧度制表达式
+    * @return Double 角度制运算结果
+    */
     public static Double toDegree(String expression) {
         Double result = new ExpressionHandler(expression + Config.END).getDecimalAnswer();
         return Math.PI * result / 180;
@@ -109,7 +113,11 @@ public class Arithmetic {
         }
         return 0.0;
     }
-
+    /**
+    * @param expression 二元运算函数表达式部分
+    * @parma type 二元运算函数类型
+    * @return Double 二元运算函数计算结果
+    */
     public static Double handleBinaryOperator(String expression, String type) {
         Stack<String> brackets = new Stack<>();
         Scanner in = new Scanner(expression);
