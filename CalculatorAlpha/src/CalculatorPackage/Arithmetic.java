@@ -115,7 +115,7 @@ public class Arithmetic {
     }
     /**
     * @param expression 二元运算函数表达式部分
-    * @parma type 二元运算函数类型
+     * @param type 二元运算函数类型
     * @return Double 二元运算函数计算结果
     */
     public static Double handleBinaryOperator(String expression, String type) {

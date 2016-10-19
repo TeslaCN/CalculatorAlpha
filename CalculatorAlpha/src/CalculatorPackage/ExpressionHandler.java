@@ -30,7 +30,7 @@ public class ExpressionHandler {
         boolean isPreviousOperator = false;
         while (in.hasNext()) {
             String temp = in.next();
-            if (isPreviousOperator && (temp.equals("+") || temp.equals("-"))) {
+            if (isPreviousOperator && (temp.matches("[+-]"))) {
                 processed += temp;
                 processed += in.next() + " ";
             } else {
@@ -48,7 +48,7 @@ public class ExpressionHandler {
     }
 
     public static boolean isOperator(String object) {
-        return object.equals("+")||object.equals("-")||object.equals("*")||object.equals("/");
+        return object.matches("[+-/*]");
     }
 
     /**
@@ -62,7 +62,7 @@ public class ExpressionHandler {
     * @param args
      */
     public static void main(String[] args) {
-        ExpressionHandler test = new ExpressionHandler("pow ( ( 4 ) ( 5 ) ) + log ( ( 4 ) ( 64 ) )  #");
+        ExpressionHandler test = new ExpressionHandler("pow ( ( 4 ) ( 5 ) ) + log ( ( 4 ) ( 64 ) ) + - 5 * - 44 / - 3 #");
         System.out.println(test.getProcessed());
         System.out.println(test.getDecimalAnswer());
     }
