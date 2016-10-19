@@ -47,7 +47,7 @@ public class Arithmetic {
             case "arctan":
                 ans = handleTrigonometric(e, operation);
                 break;
-                
+
             case "pow3":
             case "pow2":
             case "abs":
@@ -57,7 +57,9 @@ public class Arithmetic {
                 ans = handleFunction(e, operation);
                 break;
 
-            case "power":
+            case "pow":
+            case "log":
+                ans = handleBinaryOperator(e, operation);
 
                 break;
             default:
@@ -65,7 +67,7 @@ public class Arithmetic {
     }
 
     public static Double handleTrigonometric(String expression, String operation) {
-        Double result = new Algorithm(expression + Config.END).getAnswer();
+        Double result = new ExpressionHandler(expression + Config.END).getDecimalAnswer();
         switch (operation) {
             case "sin":
                 return Math.sin(result);
@@ -85,12 +87,12 @@ public class Arithmetic {
     }
 
     public static Double toDegree(String expression) {
-        Double result = new Algorithm(expression + Config.END).getAnswer();
+        Double result = new ExpressionHandler(expression + Config.END).getDecimalAnswer();
         return Math.PI * result / 180;
     }
 
     public static Double handleFunction(String expression, String operation) {
-        Double result = new Algorithm(expression + Config.END).getAnswer();
+        Double result = new ExpressionHandler(expression + Config.END).getDecimalAnswer();
         switch (operation) {
             case "pow3":
                 return Math.pow(result, 3);
@@ -108,26 +110,43 @@ public class Arithmetic {
         return 0.0;
     }
 
-    public static Double handleBinaryOperator(String expression, String type, String indexExpr) {
+    public static Double handleBinaryOperator(String expression, String type) {
         Stack<String> brackets = new Stack<>();
         Scanner in = new Scanner(expression);
         in.next();
         brackets.push(in.next());
         String base = "";
         String index = "";
-        base += brackets.peek();
-        while(in.hasNext()) {
+        base += brackets.peek() + " ";
+        while (in.hasNext()) {
             String temp = in.next();
-            if(temp.equals("(")) {
+            if (temp.equals("(")) {
                 brackets.push(temp);
             }
-            if(temp.equals(")")) {
+            base += temp + " ";
+            if (temp.equals(")")) {
                 brackets.pop();
             }
-            if(brackets.empty()) {
-                
+            if (brackets.empty()) {
+                break;
             }
-            
+        }
+        System.out.println("base:" + base);
+        Double baseValue = new ExpressionHandler(base + Config.END).getDecimalAnswer();
+        while (in.hasNext()) {
+            String temp = in.next();
+            if (!in.hasNext() && temp.equals(")")) {
+                break;
+            }
+            index += temp + " ";
+        }
+        System.out.println("index:" + index);
+        Double indexValue = new ExpressionHandler(index + Config.END).getDecimalAnswer();
+        switch (type) {
+            case "pow":
+                return Math.pow(baseValue, indexValue);
+            case "log":
+                return Math.log(indexValue) / Math.log(baseValue);
         }
         return 0.0;
     }
@@ -149,11 +168,9 @@ public class Arithmetic {
     }
 
     public static void main(String[] args) {
-        String expression = " sin ( degree ( 30 ) ) ";
-        Arithmetic test = new Arithmetic(expression);
-        System.out.println(test.getAnswer());
-        Algorithm testAl = new Algorithm(expression + Config.END);
-        Double r = testAl.getAnswer();
+        String expression = " 99 + pow ( ( 4 ) ( 64 ) ) ";
+        ExpressionHandler testExp = new ExpressionHandler(expression + Config.END);
+        Double r = testExp.getDecimalAnswer();
         System.out.println(r);
     }
 }
