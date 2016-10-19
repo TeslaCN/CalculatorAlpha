@@ -119,25 +119,16 @@ public class Arithmetic {
     * @return Double 二元运算函数计算结果
     */
     public static Double handleBinaryOperator(String expression, String type) {
-        Stack<String> brackets = new Stack<>();
         Scanner in = new Scanner(expression);
-        in.next();
-        brackets.push(in.next());
+        in.next();//消除左括号
         String base = "";
         String index = "";
-        base += brackets.peek() + " ";
         while (in.hasNext()) {
             String temp = in.next();
-            if (temp.equals("(")) {
-                brackets.push(temp);
-            }
-            base += temp + " ";
-            if (temp.equals(")")) {
-                brackets.pop();
-            }
-            if (brackets.empty()) {
+            if(temp.equals(",")) {
                 break;
             }
+            base += temp + " ";
         }
         System.out.println("base:" + base);
         Double baseValue = new ExpressionHandler(base + Config.END).getDecimalAnswer();
@@ -176,7 +167,7 @@ public class Arithmetic {
     }
 
     public static void main(String[] args) {
-        String expression = "pow ( ( 5 ) ( 4 ) ) + pow ( ( 5 ) ( 4 ) )  #";
+        String expression = "pow ( 5 , 4 ) + pow ( sin ( π / 6 ) , 4 )  #";
         ExpressionHandler testExp = new ExpressionHandler(expression);
         Double r = testExp.getDecimalAnswer();
         System.out.println(r);

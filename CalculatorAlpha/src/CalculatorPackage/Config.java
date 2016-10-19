@@ -42,10 +42,12 @@ public class Config {
     public static final String ABS = " abs ( ";
     public static final String LN = " ln ( ";
     public static final String LOG10 = " log10 ( ";
-    public static final String LOG = " log ( ( ";
-    public static final String POWER = " pow ( ( ";
+    public static final String LOG = " log ( ";
+    public static final String POWER = " pow ( ";
     public static final String POWER2 = " pow2 ( ";
     public static final String POWER3 = " pow3 ( ";
+    
+    public static final String COMMA = " , ";
     
     public static final String RADICAL = " ¡Ì ( ";
     

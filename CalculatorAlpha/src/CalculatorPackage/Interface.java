@@ -269,7 +269,10 @@ public class Interface extends Application {
                     handleNewInput();
                     append(Config.RIGHT_BRACKET);
                     break;
-
+                case ",":
+                    handleNewInput();
+                    append(Config.COMMA);
+                    break;
             }
         });
 
@@ -348,12 +351,12 @@ public class Interface extends Application {
     private final Button btRightBracket = new Button(")");
     private final Button btPower3 = new Button("Power3");
     private final Button btPower2 = new Button("Power2");
-    private final Button btPower = new Button("Power(()())");
+    private final Button btPower = new Button("Pow( , )");
     private final Button btSin = new Button("sin");
     private final Button btCos = new Button("cos");
     private final Button btTan = new Button("tan");
     private final Button btAbs = new Button("Abs");
-    private final Button btLog = new Button("log(()())");
+    private final Button btLog = new Button("log( , )");
     private final Button btLog10 = new Button("log10");
     private final Button btLn = new Button("ln()");
     private final Button btRadical = new Button("¡Ì()");
@@ -362,6 +365,7 @@ public class Interface extends Application {
     private final Button btArcCos = new Button("arccos");
     private final Button btArcTan = new Button("arctan");
     private final Button btDegree = new Button("degree");
+    private final Button btComma = new Button(" , ");
 
     private void initializeSeniorFunction() {
 
@@ -388,11 +392,12 @@ public class Interface extends Application {
         btArcCos.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btArcTan.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btDegree.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btComma.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
 
-        seniorKeyBoard.addRow(0, btAbs, btLeftBracket, btRightBracket, btLog, btLn);
-        seniorKeyBoard.addRow(1, btPower2, btPower, btRadical, btPi, btSin);
-        seniorKeyBoard.addRow(2, btCos, btTan, btArcSin, btArcCos, btArcTan);
-        seniorKeyBoard.addRow(3, btDegree);
+        seniorKeyBoard.addRow(0, btAbs, btLeftBracket, btRightBracket, btLog10, btLn);
+        seniorKeyBoard.addRow(1, btPower3, btPower2, btPower, btLog, btComma);
+        seniorKeyBoard.addRow(2, btSin, btCos, btTan, btArcSin, btArcCos);
+        seniorKeyBoard.addRow(3, btArcTan, btDegree, btPi, btRadical);
     }
 
     private void setSeniorAction() {
@@ -484,6 +489,11 @@ public class Interface extends Application {
         btDegree.setOnAction(e -> {
             handleNewInput();
             append(Config.DEGREE);
+            buttonPressed();
+        });
+        btComma.setOnAction(e -> {
+            handleNewInput();
+            append(Config.COMMA);
             buttonPressed();
         });
     }
