@@ -52,6 +52,7 @@ public class Config {
     public static final String RADICAL = " ¡Ì ( ";
     
     public static final String PI = " ¦Ð ";
+    public static final String E = " e ";
     
     public static double previousAnswer;
     

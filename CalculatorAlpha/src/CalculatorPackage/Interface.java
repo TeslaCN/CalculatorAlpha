@@ -281,7 +281,7 @@ public class Interface extends Application {
     private void append(String in) {
         expression.setText(expression.getText() + in);
     }
-    
+
     private void printAnswer() {
         ExpressionHandler cal = new ExpressionHandler(expression.getText() + Config.END);
         answer.setText(String.format("%.10f", cal.getDecimalAnswer()));
@@ -361,6 +361,7 @@ public class Interface extends Application {
     private final Button btLn = new Button("ln()");
     private final Button btRadical = new Button("¡Ì()");
     private final Button btPi = new Button("¦Ð");
+    private final Button btE = new Button("e");
     private final Button btArcSin = new Button("arcsin");
     private final Button btArcCos = new Button("arccos");
     private final Button btArcTan = new Button("arctan");
@@ -388,6 +389,7 @@ public class Interface extends Application {
         btLn.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btRadical.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btPi.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
+        btE.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btArcSin.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btArcCos.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
         btArcTan.setPrefSize(Config.BUTTON_WIDTH, Config.BUTTON_HEIGHT);
@@ -397,7 +399,7 @@ public class Interface extends Application {
         seniorKeyBoard.addRow(0, btAbs, btLeftBracket, btRightBracket, btLog10, btLn);
         seniorKeyBoard.addRow(1, btPower3, btPower2, btPower, btLog, btComma);
         seniorKeyBoard.addRow(2, btSin, btCos, btTan, btArcSin, btArcCos);
-        seniorKeyBoard.addRow(3, btArcTan, btDegree, btPi, btRadical);
+        seniorKeyBoard.addRow(3, btArcTan, btDegree, btPi, btE, btRadical);
     }
 
     private void setSeniorAction() {
@@ -469,6 +471,11 @@ public class Interface extends Application {
         btPi.setOnAction(e -> {
             handleNewInput();
             append(Config.PI);
+            buttonPressed();
+        });
+        btE.setOnAction(e -> {
+            handleNewInput();
+            append(Config.E);
             buttonPressed();
         });
         btArcSin.setOnAction(e -> {
