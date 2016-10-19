@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -23,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author TESLA_CN
  */
-public class RadixInterface extends Application {
+public class RadixConvertorInterface extends Application {
 
     private final BorderPane root = new BorderPane();
 
@@ -75,7 +74,7 @@ public class RadixInterface extends Application {
         expression.setEditable(false);
         result.setEditable(false);
 
-        checkBox.getChildren().addAll(rbHexadecimal, rbDecimal, rbOctonary, rbBinary);
+        checkBox.getChildren().addAll(rbBinary, rbOctonary, rbDecimal, rbHexadecimal);
         rbHexadecimal.setToggleGroup(checkBoxGroup);
         rbDecimal.setToggleGroup(checkBoxGroup);
         rbOctonary.setToggleGroup(checkBoxGroup);
@@ -84,7 +83,7 @@ public class RadixInterface extends Application {
 
         index = 10;
         setDecimalKeyboard();
-        
+
         rbHexadecimal.setOnAction(e -> {
             if (rbHexadecimal.isSelected()) {
                 index = 16;
@@ -132,7 +131,6 @@ public class RadixInterface extends Application {
         btNext.setPrefSize(Config.BUTTON_WIDTH / 2, Config.BUTTON_HEIGHT);
         previousNext.getChildren().addAll(btPrevious, btNext);
 
-        
         setAction();
         expression.requestFocus();
     }
@@ -189,8 +187,29 @@ public class RadixInterface extends Application {
                 case "Left":
                     returnPrevious();
                     break;
+                case "F3":
+                    rbBinary.setSelected(true);
+                    index = 2;
+                    setBinaryKeyboard();
+                    break;
+                case "F4":
+                    rbOctonary.setSelected(true);
+                    index = 8;
+                    setOctonaryKeyboard();
+                    break;
+                case "F5":
+                    rbDecimal.setSelected(true);
+                    index = 10;
+                    setDecimalKeyboard();
+                    break;
+                case "F6":
+                    rbHexadecimal.setSelected(true);
+                    index = 16;
+                    setHexaDecimalKeyboard();
+                    break;
+
             }
-            switch (key) { 
+            switch (key) {
                 case "+":
                     handleNewInput();
                     append(Config.PLUS);
@@ -209,9 +228,9 @@ public class RadixInterface extends Application {
                     break;
                 case "=":
                     break;
-                
+
             }
-            if(key.matches("[\\dA-Fa-f]") && active[Integer.parseInt(key, 16)]) {
+            if (key.matches("[\\dA-Fa-f]") && active[Integer.parseInt(key, 16)]) {
                 handleNewInput();
                 append(key.toUpperCase());
             }

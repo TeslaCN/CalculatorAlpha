@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author TESLA_CN
  */
-public class Interface extends Application {
+public class BasicCalculatorInterface extends Application {
 
     //由于大多数引用不改变,因此设为final
     private static final Config CONFIG = new Config();
@@ -89,6 +89,7 @@ public class Interface extends Application {
                 primaryStage.close();
                 root.setBottom(null);
                 primaryStage.show();
+                returnFocus();
             }
         });
         rbSenior.setOnAction(e -> {
@@ -96,6 +97,7 @@ public class Interface extends Application {
                 primaryStage.close();
                 root.setBottom(seniorKeyBoard);
                 primaryStage.show();
+                returnFocus();
             }
         });
 
@@ -150,55 +152,43 @@ public class Interface extends Application {
             btNumber[i].setOnAction(e -> {
                 handleNewInput();
                 append(temp.toString());
-                buttonPressed();
+                returnFocus();
             });
         }
         btAdd.setOnAction(e -> {
-            handleNewInput();
-            append(Config.PLUS);
-            buttonPressed();
+            inputButtonPressed(Config.PLUS);
         });
         btSubtract.setOnAction(e -> {
-            handleNewInput();
-            append(Config.SUBSTRAC);
-            buttonPressed();
+            inputButtonPressed(Config.SUBSTRAC);
         });
         btMultiply.setOnAction(e -> {
-            handleNewInput();
-            append(Config.MULTIPLY);
-            buttonPressed();
+            inputButtonPressed(Config.MULTIPLY);
         });
         btDivide.setOnAction(e -> {
-            handleNewInput();
-            append(Config.DIVIDE);
-            buttonPressed();
+            inputButtonPressed(Config.DIVIDE);
         });
         btDot.setOnAction(e -> {
-            handleNewInput();
-            append(".");
-            buttonPressed();
+            inputButtonPressed(".");
         });
         btEquals.setOnAction(e -> {
             printAnswer();
-            buttonPressed();
+            returnFocus();
         });
 
         btPrevious.setOnAction(e -> {
             returnPrevious();
-            buttonPressed();
+            returnFocus();
         });
         btNext.setOnAction(e -> {
             returnNext();
-            buttonPressed();
+            returnFocus();
         });
         btAC.setOnAction(e -> {
             allClear();
-            buttonPressed();
+            returnFocus();
         });
         btPreviousAns.setOnAction(e -> {
-            handleNewInput();
-            append(Config.ANS);
-            buttonPressed();
+            inputButtonPressed(Config.ANS);
         });
 
         expression.setOnKeyPressed(e -> {
@@ -224,8 +214,11 @@ public class Interface extends Application {
                 case "Left":
                     returnPrevious();
                     break;
+                case "F4":
+
+                case "F5":
             }
-            switch (key) {
+            switch (key.toUpperCase()) {
                 case "1":
                 case "2":
                 case "3":
@@ -237,41 +230,54 @@ public class Interface extends Application {
                 case "9":
                 case "0":
                 case ".":
-                    handleNewInput();
-                    append(e.getText());
+                    inputKeyPressed(e.getText());
                     break;
 
                 case "+":
-                    handleNewInput();
-                    append(Config.PLUS);
+                    inputKeyPressed(Config.PLUS);
                     break;
                 case "-":
-                    handleNewInput();
-                    append(Config.SUBSTRAC);
+                    inputKeyPressed(Config.SUBSTRAC);
                     break;
                 case "*":
-                    handleNewInput();
-                    append(Config.MULTIPLY);
+                    inputKeyPressed(Config.MULTIPLY);
                     break;
                 case "/":
-                    handleNewInput();
-                    append(Config.DIVIDE);
+                    inputKeyPressed(Config.DIVIDE);
                     break;
                 case "=":
                     printAnswer();
                     break;
 
                 case "(":
-                    handleNewInput();
-                    append(Config.LEFT_BRACKET);
+                    inputKeyPressed(Config.LEFT_BRACKET);
                     break;
                 case ")":
-                    handleNewInput();
-                    append(Config.RIGHT_BRACKET);
+                    inputKeyPressed(Config.RIGHT_BRACKET);
                     break;
                 case ",":
-                    handleNewInput();
-                    append(Config.COMMA);
+                    inputKeyPressed(Config.COMMA);
+                    break;
+                case "E":
+                    inputKeyPressed(Config.E);
+                    break;
+                case "S":
+                    inputKeyPressed(Config.SIN);
+                    break;
+                case "C":
+                    inputKeyPressed(Config.COS);
+                    break;
+                case "T":
+                    inputKeyPressed(Config.TAN);
+                    break;
+                case "A":
+                    inputKeyPressed(Config.ABS);
+                    break;
+                case "D":
+                    inputKeyPressed(Config.DEGREE);
+                    break;
+                case "P":
+                    inputKeyPressed(Config.PI);
                     break;
             }
         });
@@ -280,6 +286,17 @@ public class Interface extends Application {
 
     private void append(String in) {
         expression.setText(expression.getText() + in);
+    }
+    
+    private void inputKeyPressed(String object) {
+        handleNewInput();
+        append(object);
+    }
+
+    private void inputButtonPressed(String object) {
+        handleNewInput();
+        append(object);
+        returnFocus();
     }
 
     private void printAnswer() {
@@ -308,7 +325,7 @@ public class Interface extends Application {
         recordPreviousAction();
     }
 
-    private void buttonPressed() {
+    private void returnFocus() {
         expression.requestFocus();
     }
 
@@ -404,104 +421,64 @@ public class Interface extends Application {
 
     private void setSeniorAction() {
         btLeftBracket.setOnAction(e -> {
-            handleNewInput();
-            append(Config.LEFT_BRACKET);
-            buttonPressed();
+            inputButtonPressed(Config.LEFT_BRACKET);
         });
         btRightBracket.setOnAction(e -> {
-            handleNewInput();
-            append(Config.RIGHT_BRACKET);
-            buttonPressed();
+            inputButtonPressed(Config.RIGHT_BRACKET);
         });
         btPower3.setOnAction(e -> {
-            handleNewInput();
-            append(Config.POWER3);
-            buttonPressed();
+            inputButtonPressed(Config.POWER3);
         });
         btPower2.setOnAction(e -> {
-            handleNewInput();
-            append(Config.POWER2);
-            buttonPressed();
+            inputButtonPressed(Config.POWER2);
         });
         btPower.setOnAction(e -> {
-            handleNewInput();
-            append(Config.POWER);
-            buttonPressed();
+            inputButtonPressed(Config.POWER);
         });
         btSin.setOnAction(e -> {
-            handleNewInput();
-            append(Config.SIN);
-            buttonPressed();
+            inputButtonPressed(Config.SIN);
         });
         btCos.setOnAction(e -> {
-            handleNewInput();
-            append(Config.COS);
-            buttonPressed();
+            inputButtonPressed(Config.COS);
         });
         btTan.setOnAction(e -> {
-            handleNewInput();
-            append(Config.TAN);
-            buttonPressed();
+            inputButtonPressed(Config.TAN);
         });
         btAbs.setOnAction(e -> {
-            handleNewInput();
-            append(Config.ABS);
-            buttonPressed();
+            inputButtonPressed(Config.ABS);
         });
         btLog.setOnAction(e -> {
-            handleNewInput();
-            append(Config.LOG);
-            buttonPressed();
+            inputButtonPressed(Config.LOG);
         });
         btLog10.setOnAction(e -> {
-            handleNewInput();
-            append(Config.LOG10);
-            buttonPressed();
+            inputButtonPressed(Config.LOG10);
         });
         btLn.setOnAction(e -> {
-            handleNewInput();
-            append(Config.LN);
-            buttonPressed();
+            inputButtonPressed(Config.LN);
         });
         btRadical.setOnAction(e -> {
-            handleNewInput();
-            append(Config.RADICAL);
-            buttonPressed();
+            inputButtonPressed(Config.RADICAL);
         });
         btPi.setOnAction(e -> {
-            handleNewInput();
-            append(Config.PI);
-            buttonPressed();
+            inputButtonPressed(Config.PI);
         });
         btE.setOnAction(e -> {
-            handleNewInput();
-            append(Config.E);
-            buttonPressed();
+            inputButtonPressed(Config.E);
         });
         btArcSin.setOnAction(e -> {
-            handleNewInput();
-            append(Config.ASIN);
-            buttonPressed();
+            inputButtonPressed(Config.ASIN);
         });
         btArcCos.setOnAction(e -> {
-            handleNewInput();
-            append(Config.ACOS);
-            buttonPressed();
+            inputButtonPressed(Config.ACOS);
         });
         btArcTan.setOnAction(e -> {
-            handleNewInput();
-            append(Config.ATAN);
-            buttonPressed();
+            inputButtonPressed(Config.ATAN);
         });
         btDegree.setOnAction(e -> {
-            handleNewInput();
-            append(Config.DEGREE);
-            buttonPressed();
+            inputButtonPressed(Config.DEGREE);
         });
         btComma.setOnAction(e -> {
-            handleNewInput();
-            append(Config.COMMA);
-            buttonPressed();
+            inputButtonPressed(Config.COMMA);
         });
     }
 
