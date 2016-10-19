@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class Algorithm {
 
-    private final Stack<Double> number = new Stack<>();
+    final Stack<Double> number = new Stack<>();
     private final Stack<String> symbol = new Stack<>();
     private static final Map<String, Integer> cmp = new HashMap<>();
 
