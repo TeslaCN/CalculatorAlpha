@@ -46,13 +46,22 @@ public class Algorithm {
         Scanner expression = new Scanner(expr);
         String temp = expression.next();
         while (!("#".equals(temp)) || !("#".equals(symbol.peek()))) {
-            if (temp.matches("[+-]?\\d.*") || temp.charAt(0) == '¦Ð'||temp.equals("Ans")||temp.equals("e")) {
-                if (temp.charAt(0) == '¦Ð') {
-                    number.push(Math.PI);
-                }else if (temp.equals("e")) {
-                    number.push(Math.E);
-                }else if (temp.equals("Ans")) {
-                    number.push(Config.previousAnswer);
+            if (temp.matches("[+-]?\\d.*") || temp.matches("[+-]?¦Ð")||temp.matches("[+-]?Ans")||temp.matches("[+-]?e")) {
+                if (temp.matches("[+-]?¦Ð")) {
+                    if (temp.charAt(0)=='-') {
+                        number.push(-Math.PI);
+                    }
+                    else number.push(Math.PI);
+                }else if (temp.matches("[+-]?e")) {
+                    if (temp.charAt(0)=='-') {
+                        number.push(-Math.E);
+                    }
+                    else number.push(Math.E);
+                }else if (temp.matches("[+-]?Ans")) {
+                    if (temp.charAt(0)=='-') {
+                        number.push(-Config.previousAnswer);
+                    }
+                    else number.push(Config.previousAnswer);
                 }else {
                     Double temp_num = Double.parseDouble(temp);
                     number.push(temp_num);
