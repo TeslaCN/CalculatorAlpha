@@ -46,9 +46,11 @@ public class Algorithm {
         Scanner expression = new Scanner(expr);
         String temp = expression.next();
         while (!("#".equals(temp)) || !("#".equals(symbol.peek()))) {
-            if (temp.matches("[+-]?\\d.*") || temp.charAt(0) == '¦Ð'||temp.equals("Ans")) {
+            if (temp.matches("[+-]?\\d.*") || temp.charAt(0) == '¦Ð'||temp.equals("Ans")||temp.equals("e")) {
                 if (temp.charAt(0) == '¦Ð') {
                     number.push(Math.PI);
+                }else if (temp.equals("e")) {
+                    number.push(Math.E);
                 }else if (temp.equals("Ans")) {
                     number.push(Config.previousAnswer);
                 }else {
