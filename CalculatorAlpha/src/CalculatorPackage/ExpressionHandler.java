@@ -62,9 +62,10 @@ public class ExpressionHandler {
     * @param args
      */
     public static void main(String[] args) {
-        ExpressionHandler test = new ExpressionHandler("pow ( ( 4 ) ( 5 ) ) + log ( ( 4 ) ( 64 ) ) + - 5 * - 44 / - 3 #");
+        ExpressionHandler test = new ExpressionHandler("pow ( 4 , 5 ) + log ( 4 , 64 ) + - 5 * - 44 / - 3 #");
         System.out.println(test.getProcessed());
         System.out.println(test.getDecimalAnswer());
+        System.out.println(Integer.parseInt("D", 16));
     }
 
 }
