@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class Algorithm {
 
-    final Stack<Double> number = new Stack<>();
+    private final Stack<Double> number = new Stack<>();
     private final Stack<String> symbol = new Stack<>();
     private static final Map<String, Integer> cmp = new HashMap<>();
 
@@ -46,10 +46,12 @@ public class Algorithm {
         Scanner expression = new Scanner(expr);
         String temp = expression.next();
         while (!("#".equals(temp)) || !("#".equals(symbol.peek()))) {
-            if (temp.matches("[+-]?\\d.*") || temp.charAt(0) == '¦Ð') {
+            if (temp.matches("[+-]?\\d.*") || temp.charAt(0) == '¦Ð'||temp.equals("Ans")) {
                 if (temp.charAt(0) == '¦Ð') {
                     number.push(Math.PI);
-                } else {
+                }else if (temp.equals("ANS")) {
+                    number.push(Config.previousAnswer);
+                }else {
                     Double temp_num = Double.parseDouble(temp);
                     number.push(temp_num);
                 }
