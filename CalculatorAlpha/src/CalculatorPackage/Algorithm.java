@@ -49,7 +49,7 @@ public class Algorithm {
             if (temp.matches("[+-]?\\d.*") || temp.charAt(0) == '¦Ð'||temp.equals("Ans")) {
                 if (temp.charAt(0) == '¦Ð') {
                     number.push(Math.PI);
-                }else if (temp.equals("ANS")) {
+                }else if (temp.equals("Ans")) {
                     number.push(Config.previousAnswer);
                 }else {
                     Double temp_num = Double.parseDouble(temp);
