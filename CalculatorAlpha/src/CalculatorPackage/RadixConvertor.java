@@ -13,16 +13,9 @@ import java.util.Scanner;
  */
 public class RadixConvertor {
     
-    private String expression = "";
-    private int radix = 10;
-    
-    public RadixConvertor(String expression, Integer radix) {
-       this.expression = expression;
-       this.radix = radix;
-    }
-    
+
  
-    public String RandomConvert(String source, Integer radix, Integer targetradix){
+    public static String RandomConvert(String source, Integer radix, Integer targetradix){
         String convertresult = "";
         switch(radix){
             case 2: if(targetradix == 8) 
@@ -57,7 +50,12 @@ public class RadixConvertor {
         return convertresult;
     }
 
-    public String getRandomExpression(String expression, Integer radix, Integer targetradix) {
+    /**
+     * @param radix expression进制类型
+     * @param targetradix expression需要转换的目标进制类型
+     * @return 
+     */
+    public static String getRandomExpression(String expression, Integer radix, Integer targetradix) {
         
         Scanner in = new Scanner(expression);
         StringBuffer stringbuffer = new StringBuffer();
@@ -67,7 +65,7 @@ public class RadixConvertor {
                 stringbuffer.append(temp);
                 stringbuffer.append(" ");
             }else{
-                temp = RandomConvert(temp, radix, targetradix);
+                temp =  RandomConvert(temp, radix, targetradix);
                 stringbuffer.append(temp);
                 stringbuffer.append(" ");
             }
@@ -78,8 +76,7 @@ public class RadixConvertor {
     
         public static void main(String args[]){
         String expression = "( 111 + 111010 ) * 110101 + 100000";
-        RadixConvertor a = new RadixConvertor(expression,2);
-        expression = a.getRandomExpression(expression, 2 ,10);
+        expression = getRandomExpression(expression, 2 ,10);
        // expression = a.RandomConvert(expression,2);
         System.out.println(expression);
     }
