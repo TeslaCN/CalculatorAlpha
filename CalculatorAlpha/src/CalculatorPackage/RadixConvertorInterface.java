@@ -24,6 +24,8 @@ import javafx.stage.Stage;
  */
 public class RadixConvertorInterface extends Application {
 
+    public static final Config CONFIG = new Config();
+
     private final BorderPane root = new BorderPane();
 
     private final VBox display = new VBox();
@@ -67,7 +69,8 @@ public class RadixConvertorInterface extends Application {
     private final Button btNext = new Button("->");
     private final HBox previousNext = new HBox(Config.BASIC_KEYBOARD_GAP);
 
-    private Integer index;
+    private Integer radix;
+    private Integer previousRadix;
 
     private void initialize() {
         display.getChildren().addAll(expression, result);
@@ -81,12 +84,11 @@ public class RadixConvertorInterface extends Application {
         rbBinary.setToggleGroup(checkBoxGroup);
         rbDecimal.setSelected(true);
 
-        index = 10;
+        radix = 10;
         setDecimalKeyboard();
 
         rbHexadecimal.setOnAction(e -> {
             if (rbHexadecimal.isSelected()) {
-                index = 16;
                 setHexaDecimalKeyboard();
                 buttonPressed();
             }
@@ -94,7 +96,6 @@ public class RadixConvertorInterface extends Application {
 
         rbDecimal.setOnAction(e -> {
             if (rbDecimal.isSelected()) {
-                index = 10;
                 setDecimalKeyboard();
                 buttonPressed();
             }
@@ -102,7 +103,6 @@ public class RadixConvertorInterface extends Application {
 
         rbOctonary.setOnAction(e -> {
             if (rbOctonary.isSelected()) {
-                index = 8;
                 setOctonaryKeyboard();
                 buttonPressed();
             }
@@ -110,7 +110,6 @@ public class RadixConvertorInterface extends Application {
 
         rbBinary.setOnAction(e -> {
             if (rbBinary.isSelected()) {
-                index = 2;
                 setBinaryKeyboard();
                 buttonPressed();
             }
@@ -136,30 +135,34 @@ public class RadixConvertorInterface extends Application {
     }
 
     private void setDecimalKeyboard() {
+        changeRadix(10);
         keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
-            active[i] = i < index;
+            active[i] = i < radix;
         }
     }
 
     private void setHexaDecimalKeyboard() {
+        changeRadix(16);
         keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
-            active[i] = i < index;
+            active[i] = i < radix;
         }
     }
 
     private void setOctonaryKeyboard() {
+        changeRadix(8);
         keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
-            active[i] = i < index;
+            active[i] = i < radix;
         }
     }
 
     private void setBinaryKeyboard() {
+        changeRadix(2);
         keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
-            active[i] = i < index;
+            active[i] = i < radix;
         }
     }
 
@@ -171,9 +174,10 @@ public class RadixConvertorInterface extends Application {
 //            expression.setText(e.getCode() + "\n" + e.getCharacter() + "\n" + e.getText());
             String key = e.getText();
             String code = e.getCode().getName();
-            System.out.println(key + "==" + e.getCode().getName());
+//            System.out.println(key + "==" + e.getCode().getName());
             switch (code) {
                 case "Enter":
+                    printResult();
                     break;
 
                 case "Right":
@@ -188,23 +192,31 @@ public class RadixConvertorInterface extends Application {
                     returnPrevious();
                     break;
                 case "F3":
+                    if (rbBinary.isSelected()) {
+                        break;
+                    }
                     rbBinary.setSelected(true);
-                    index = 2;
                     setBinaryKeyboard();
                     break;
                 case "F4":
+                    if (rbOctonary.isSelected()) {
+                        break;
+                    }
                     rbOctonary.setSelected(true);
-                    index = 8;
                     setOctonaryKeyboard();
                     break;
                 case "F5":
+                    if (rbDecimal.isSelected()) {
+                        break;
+                    }
                     rbDecimal.setSelected(true);
-                    index = 10;
                     setDecimalKeyboard();
                     break;
                 case "F6":
+                    if (rbHexadecimal.isSelected()) {
+                        break;
+                    }
                     rbHexadecimal.setSelected(true);
-                    index = 16;
                     setHexaDecimalKeyboard();
                     break;
 
@@ -227,6 +239,7 @@ public class RadixConvertorInterface extends Application {
                     append(Config.DIVIDE);
                     break;
                 case "=":
+                    printResult();
                     break;
 
             }
@@ -239,8 +252,34 @@ public class RadixConvertorInterface extends Application {
         expression.requestFocus();
     }
 
+    private void changeRadix(Integer radix) {
+        previousRadix = this.radix;
+        this.radix = radix;
+        System.out.println(previousRadix + ":" + radix);
+        if (!expression.getText().isEmpty()) {
+            expression.setText(RadixConvertor.getRandomExpression(
+                    expression.getText(), previousRadix, radix).toUpperCase().trim());
+            if(!Character.isDigit(expression.getText().charAt(expression.getText().length() - 1))) {
+                expression.setText(expression.getText() + " ");
+            }
+        }
+        if (!result.getText().isEmpty()) {
+            result.setText(RadixConvertor.getRandomExpression(
+                    result.getText(), previousRadix, radix).toUpperCase().trim());
+        }
+    }
+
     private void append(String in) {
         expression.setText(expression.getText() + in);
+    }
+
+    private void printResult() {
+        String object = expression.getText();
+        if (radix != 10) {
+            object = RadixConvertor.getRandomExpression(object, radix, 10);
+        }
+        Integer res = new ExpressionHandler(object).getDecimalAnswer().intValue();
+        result.setText(radix == 10 ? res.toString() : RadixConvertor.getRandomExpression(res.toString(), 10, radix));
     }
 
     //清除所有内容
