@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package CalculatorPackage;
-
+import java.math.BigInteger;
 import java.util.Scanner;
 
 /**
@@ -19,32 +19,32 @@ public class RadixConvertor {
         String convertresult = "";
         switch(radix){
             case 2: if(targetradix == 8) 
-                        convertresult = Integer.toOctalString(Integer.parseInt(source, 2));
+                        convertresult = new BigInteger(source, 2).toString(8);
                     else if(targetradix == 10)
-                        convertresult = Integer.valueOf(source,2).toString();
+                        convertresult = new BigInteger(source, 2).toString(10);
                     else if(targetradix == 16)
-                        convertresult = Integer.toHexString(Integer.parseInt(source,2));
+                        convertresult = new BigInteger(source, 2).toString(16);
                     break;
             case 8: if(targetradix == 2) 
-                        convertresult = Integer.toBinaryString(Integer.parseInt(source, 8));
+                        convertresult = new BigInteger(source, 8).toString(2);
                     else if(targetradix == 10)
-                        convertresult = Integer.valueOf(source,8).toString();
+                        convertresult = new BigInteger(source, 8).toString(10);
                     else if(targetradix == 16)
-                        convertresult = Integer.toHexString(Integer.parseInt(source, 8));
+                        convertresult = new BigInteger(source, 8).toString(16);
                     break;
             case 10:if(targetradix == 2) 
-                        convertresult = Integer.toBinaryString(Integer.parseInt(source, 10));
+                        convertresult = new BigInteger(source, 10).toString(2);
                     else if(targetradix == 8)
-                        convertresult = Integer.toOctalString(Integer.parseInt(source, 10));
+                        convertresult = new BigInteger(source, 10).toString(8);
                     else if(targetradix == 16)
-                        convertresult = Integer.toHexString(Integer.parseInt(source, 10));
+                        convertresult = new BigInteger(source, 10).toString(16);
                     break;
             case 16:if(targetradix == 2) 
-                        convertresult = Integer.toBinaryString(Integer.parseInt(source, 16));
+                        convertresult = new BigInteger(source, 16).toString(2);
                     else if(targetradix == 8)
-                        convertresult = Integer.toOctalString(Integer.parseInt(source, 16));
+                        convertresult = new BigInteger(source, 16).toString(8);
                     else if(targetradix == 10)
-                        convertresult = Integer.valueOf(source,16).toString();
+                        convertresult = new BigInteger(source, 16).toString(10);
                     break;
         }
         return convertresult;
@@ -75,8 +75,8 @@ public class RadixConvertor {
     
     
         public static void main(String args[]){
-        String expression = "( 111 + 111010 ) * 110101 + 100000";
-        expression = getRandomExpression(expression, 2 ,10);
+        String expression = "( 111 + 111010 ) * 110101000 + 10000000000000000000000";
+        expression = getRandomExpression(expression, 10 ,16);
        // expression = a.RandomConvert(expression,2);
         System.out.println(expression);
     }
