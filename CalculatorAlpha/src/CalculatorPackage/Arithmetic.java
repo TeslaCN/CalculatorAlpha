@@ -6,11 +6,6 @@
 package CalculatorPackage;
 
 import java.util.Scanner;
-import java.util.Stack;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 /**
  *
@@ -31,6 +26,10 @@ public class Arithmetic {
         handleExpression();
     }
 
+    /**
+     * 将构造方法接收到的表达式 String 进行 数学函数 与 自变量分离,
+     * 并且判断 数学函数 后将表达式送入对应的数学函数处理方法
+     */
     private void handleExpression() {
         Scanner input = new Scanner(expr);
         String operation = input.next();
@@ -66,7 +65,14 @@ public class Arithmetic {
         }
     }
 
+    /**
+     * 该方法用于处理 三角函数
+     * @param expression 三角函数所计算的表达式
+     * @param operation 本参数接收三角函数类型
+     * @return 返回三角函数计算结果
+     */
     public static Double handleTrigonometric(String expression, String operation) {
+        //将三角函数所计算的表达式送入表达式求值类中,将得到的表达式结果送入对应的三角函数得到相应的Double结果
         Double result = new ExpressionHandler(expression + Config.END).getDecimalAnswer();
         switch (operation) {
             case "sin":
@@ -87,6 +93,7 @@ public class Arithmetic {
     }
 
     /**
+     * 该方法将弧度单位的表达式计算出以角度为单位的结果
     * @param expression 弧度制表达式
     * @return Double 角度制运算结果
     */
@@ -95,6 +102,12 @@ public class Arithmetic {
         return Math.PI * result / 180;
     }
 
+    /**
+     * 本方法用于计算对数或者指数,以及绝对值等数学函数
+     * @param expression 接收被计算表达式
+     * @param operation 接收数学函数类型
+     * @return 
+     */
     public static Double handleFunction(String expression, String operation) {
         Double result = new ExpressionHandler(expression + Config.END).getDecimalAnswer();
         switch (operation) {
@@ -114,6 +127,7 @@ public class Arithmetic {
         return 0.0;
     }
     /**
+     * 本方法用于处理二元函数,例如power和log
     * @param expression 二元运算函数表达式部分
      * @param type 二元运算函数类型
     * @return Double 二元运算函数计算结果
@@ -152,19 +166,12 @@ public class Arithmetic {
 
     /**
      *
-     * @return 算数值
+     * @return 以Double类型返回数学函数计算结果
      */
     public Double getAnswer() {
         return ans;
     }
 
-    private void error(String err) {
-        Stage stage = new Stage();
-        Text text = new Text(err);
-        Button btContinue = new Button("Continue");
-        VBox pane = new VBox();
-        pane.getChildren().addAll(text, btContinue);
-    }
 
     public static void main(String[] args) {
         String expression = "pow ( 5 , 4 ) + pow ( sin ( π / 6 ) , 4 )  #";

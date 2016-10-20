@@ -25,6 +25,10 @@ public class ExpressionHandler {
         pretreat();
     }
 
+    /**
+    * 该方法对表达式String进行预处理,消除表达式中正负号与数字之间的空格,
+    * 否则包装类型Double无法直接将带符号的数字String转化为Double类型
+    */
     private void pretreat() {
         Scanner in = new Scanner(expression);
         boolean isPreviousOperator = false;
@@ -47,6 +51,11 @@ public class ExpressionHandler {
         return processed;
     }
 
+    /**
+     * 
+     * @param object 被判断的字符
+     * @return boolean 该符号是否加减乘除号其中之一
+     */
     public static boolean isOperator(String object) {
         return object.matches("[+-/*]");
     }
