@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  *
  * @author TESLA_CN
  */
-public class IinearEquationInterface extends Application {
+public class LinearEquationInterface extends Application {
     
     @Override
     public void start(Stage primaryStage) {

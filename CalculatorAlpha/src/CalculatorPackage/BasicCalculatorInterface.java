@@ -59,6 +59,10 @@ public class BasicCalculatorInterface extends Application {
     private final RadioButton rbSenior = new RadioButton("Senior");
     private final ToggleGroup tg = new ToggleGroup();
 
+    private final Button btRadixConverter = new Button("创建进制转换新窗口");
+    private final Button btSolveEquation = new Button("线性方程组求解窗口");
+    private final HBox extraButtonBox = new HBox(Config.BASIC_KEYBOARD_GAP / 2);
+
     @Override
     public void start(Stage primaryStage) {
 
@@ -67,7 +71,15 @@ public class BasicCalculatorInterface extends Application {
         basicKeyBoard.setVgap(Config.BASIC_KEYBOARD_GAP);
         basicKeyBoard.setPadding(new Insets(Config.BASIC_KEYBOARD_INSETS));
 
-        display.getChildren().addAll(expression, answer);
+        btRadixConverter.setPrefSize((5 * Config.BUTTON_WIDTH + 4 * Config.BASIC_KEYBOARD_GAP) / 2,
+                Config.BUTTON_HEIGHT);
+        btSolveEquation.setPrefSize((5 * Config.BUTTON_WIDTH + 4 * Config.BASIC_KEYBOARD_GAP) / 2,
+                Config.BUTTON_HEIGHT);
+
+        
+        extraButtonBox.getChildren().addAll(btRadixConverter, btSolveEquation);
+
+        display.getChildren().addAll(expression, answer, extraButtonBox);
 
         root.setTop(display);
         root.setCenter(basicKeyBoard);
@@ -99,6 +111,13 @@ public class BasicCalculatorInterface extends Application {
                 primaryStage.show();
                 returnFocus();
             }
+        });
+        
+        btRadixConverter.setOnAction(e -> {
+            new RadixConvertorInterface().start(new Stage());
+        });
+        btSolveEquation.setOnAction(e -> {
+            new LinearEquationInterface().start(new Stage());
         });
 
         expression.requestFocus();
@@ -287,7 +306,7 @@ public class BasicCalculatorInterface extends Application {
     private void append(String in) {
         expression.setText(expression.getText() + in);
     }
-    
+
     private void inputKeyPressed(String object) {
         handleNewInput();
         append(object);

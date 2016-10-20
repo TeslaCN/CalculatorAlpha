@@ -7,6 +7,7 @@ package CalculatorPackage;
 
 import java.util.Stack;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -56,7 +57,7 @@ public class RadixConvertorInterface extends Application {
     }
 
     private final Button[] btNumber = new Button[16];
-    private boolean[] active = new boolean[16];
+    private final boolean[] active = new boolean[16];
 
     private final Button btAdd = new Button("+");
     private final Button btSubtract = new Button("-");
@@ -76,6 +77,7 @@ public class RadixConvertorInterface extends Application {
         display.getChildren().addAll(expression, result);
         expression.setEditable(false);
         result.setEditable(false);
+        result.setAlignment(Pos.CENTER_RIGHT);
 
         checkBox.getChildren().addAll(rbBinary, rbOctonary, rbDecimal, rbHexadecimal);
         rbHexadecimal.setToggleGroup(checkBoxGroup);
@@ -278,7 +280,7 @@ public class RadixConvertorInterface extends Application {
         if (radix != 10) {
             object = RadixConvertor.getRandomExpression(object, radix, 10);
         }
-        Integer res = new ExpressionHandler(object).getDecimalAnswer().intValue();
+        Integer res = new ExpressionHandler(object + Config.END).getDecimalAnswer().intValue();
         result.setText(radix == 10 ? res.toString() : RadixConvertor.getRandomExpression(res.toString(), 10, radix));
     }
 
