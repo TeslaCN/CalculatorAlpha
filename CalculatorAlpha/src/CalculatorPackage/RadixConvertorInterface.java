@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -30,7 +31,7 @@ public class RadixConvertorInterface extends Application {
     private final BorderPane root = new BorderPane();
 
     private final VBox display = new VBox();
-    private final TextField expression = new TextField();
+    private final TextArea expression = new TextArea();
     private final TextField result = new TextField();
 
     private final GridPane keyboard = new GridPane();
@@ -51,6 +52,7 @@ public class RadixConvertorInterface extends Application {
         initialize();
 
         Scene scene = new Scene(root);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Radix Convertor");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -76,6 +78,9 @@ public class RadixConvertorInterface extends Application {
     private void initialize() {
         display.getChildren().addAll(expression, result);
         expression.setEditable(false);
+        expression.setWrapText(true);
+        expression.setPrefWidth(keyboard.getWidth());
+        expression.setPrefRowCount(3);
         result.setEditable(false);
         result.setAlignment(Pos.CENTER_RIGHT);
 
@@ -261,7 +266,7 @@ public class RadixConvertorInterface extends Application {
         if (!expression.getText().isEmpty()) {
             expression.setText(RadixConvertor.getRandomExpression(
                     expression.getText(), previousRadix, radix).toUpperCase().trim());
-            if(!Character.isDigit(expression.getText().charAt(expression.getText().length() - 1))) {
+            if (!Character.isDigit(expression.getText().charAt(expression.getText().length() - 1))) {
                 expression.setText(expression.getText() + " ");
             }
         }
@@ -280,7 +285,7 @@ public class RadixConvertorInterface extends Application {
         if (radix != 10) {
             object = RadixConvertor.getRandomExpression(object, radix, 10);
         }
-        Integer res = new ExpressionHandler(object + Config.END).getDecimalAnswer().intValue();
+        Long res = new ExpressionHandler(object + Config.END).getDecimalAnswer().longValue();
         result.setText(radix == 10 ? res.toString() : RadixConvertor.getRandomExpression(res.toString(), 10, radix));
     }
 
