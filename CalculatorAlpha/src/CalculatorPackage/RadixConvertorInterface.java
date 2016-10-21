@@ -38,10 +38,10 @@ public class RadixConvertorInterface extends Application {
 
     private final HBox checkBox = new HBox(5);
     private final ToggleGroup checkBoxGroup = new ToggleGroup();
-    private final RadioButton rbHexadecimal = new RadioButton("Hexadecimal");
-    private final RadioButton rbDecimal = new RadioButton("Decimal");
-    private final RadioButton rbOctonary = new RadioButton("Octonary");
-    private final RadioButton rbBinary = new RadioButton("Binary");
+    private final RadioButton rbHexadecimal = new RadioButton("(F6)Hexadecimal");
+    private final RadioButton rbDecimal = new RadioButton("(F5)Decimal");
+    private final RadioButton rbOctonary = new RadioButton("(F4)Octonary");
+    private final RadioButton rbBinary = new RadioButton("(F3)Binary");
 
     @Override
     public void start(Stage primaryStage) {
@@ -83,6 +83,12 @@ public class RadixConvertorInterface extends Application {
         expression.setPrefRowCount(3);
         result.setEditable(false);
         result.setAlignment(Pos.CENTER_RIGHT);
+        
+        result.focusedProperty().addListener(lv -> {
+            if(result.isFocused()) {
+                returnFocus();
+            }
+        });
 
         checkBox.getChildren().addAll(rbBinary, rbOctonary, rbDecimal, rbHexadecimal);
         rbHexadecimal.setToggleGroup(checkBoxGroup);
@@ -97,28 +103,28 @@ public class RadixConvertorInterface extends Application {
         rbHexadecimal.setOnAction(e -> {
             if (rbHexadecimal.isSelected()) {
                 setHexaDecimalKeyboard();
-                buttonPressed();
+                returnFocus();
             }
         });
 
         rbDecimal.setOnAction(e -> {
             if (rbDecimal.isSelected()) {
                 setDecimalKeyboard();
-                buttonPressed();
+                returnFocus();
             }
         });
 
         rbOctonary.setOnAction(e -> {
             if (rbOctonary.isSelected()) {
                 setOctonaryKeyboard();
-                buttonPressed();
+                returnFocus();
             }
         });
 
         rbBinary.setOnAction(e -> {
             if (rbBinary.isSelected()) {
                 setBinaryKeyboard();
-                buttonPressed();
+                returnFocus();
             }
         });
 
@@ -147,6 +153,7 @@ public class RadixConvertorInterface extends Application {
         for (int i = 0; i < btNumber.length; i++) {
             active[i] = i < radix;
         }
+        
     }
 
     private void setHexaDecimalKeyboard() {
@@ -181,7 +188,7 @@ public class RadixConvertorInterface extends Application {
 //            expression.setText(e.getCode() + "\n" + e.getCharacter() + "\n" + e.getText());
             String key = e.getText();
             String code = e.getCode().getName();
-//            System.out.println(key + "==" + e.getCode().getName());
+            System.out.println(key + "==" + e.getCode().getName());
             switch (code) {
                 case "Enter":
                     printResult();
@@ -309,7 +316,7 @@ public class RadixConvertorInterface extends Application {
         recordPreviousAction();
     }
 
-    private void buttonPressed() {
+    private void returnFocus() {
         expression.requestFocus();
     }
 

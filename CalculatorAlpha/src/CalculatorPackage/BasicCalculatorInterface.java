@@ -115,11 +115,18 @@ public class BasicCalculatorInterface extends Application {
         
         btRadixConverter.setOnAction(e -> {
             new RadixConvertorInterface().start(new Stage());
+            returnFocus();
         });
         btSolveEquation.setOnAction(e -> {
             new LinearEquationInterface().start(new Stage());
+            returnFocus();
         });
 
+        answer.focusedProperty().addListener(lv -> {
+            if(answer.isFocused()) {
+                returnFocus();
+            }
+        });
         expression.requestFocus();
     }
 
