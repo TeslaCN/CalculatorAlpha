@@ -49,7 +49,9 @@ public class LinearEquationInterface extends Application {
         primaryStage.show();
 
         btContinue.setOnAction(e -> {
-            if (!tfObject.getText().trim().equals("") && (Integer.parseInt(tfObject.getText().trim()) > 26 || Integer.parseInt(tfObject.getText().trim()) < 1)) {
+            if (!tfObject.getText().trim().equals("")
+                    && (Integer.parseInt(tfObject.getText().trim()) > 26
+                    || Integer.parseInt(tfObject.getText().trim()) < 1)) {
                 error(new Stage());
             } else {
                 primaryStage.close();
@@ -91,16 +93,20 @@ public class LinearEquationInterface extends Application {
         table.setAlignment(Pos.CENTER);
         input = new TextField[object][object + 1];
         for (int i = 1; i <= object + 1; i++) {
-            table.add(new Text("     " + Character.toString((char) (96 + i))
-                    + (i <= object ? "(X" + i + ")" + (i < object ? " +" : " ==") : "")), i, 0);
+            table.add(new Text("        " + Character.toString((char) (96 + i))), i, 0);
         }
         for (int i = 0; i < object; i++) {
             table.add(new Text(Integer.toString(i + 1)), 0, i + 1);
             for (int j = 0; j < object + 1; j++) {
                 input[i][j] = new TextField("0.0");
-                input[i][j].setPrefColumnCount(5);
+                input[i][j].setPrefColumnCount(4);
                 input[i][j].setAlignment(Pos.CENTER);
-                table.add(input[i][j], j + 1, i + 1);
+                HBox box = new HBox(input[i][j],
+                        new Text(j < object ? "X" + (j + 1)
+                                + (j < object - 1 ? " +" : "=") : ""));
+                box.setSpacing(5);
+                box.setAlignment(Pos.CENTER);
+                table.add(box, j + 1, i + 1);
             }
         }
 
