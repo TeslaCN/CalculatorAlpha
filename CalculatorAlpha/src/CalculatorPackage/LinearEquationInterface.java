@@ -36,6 +36,8 @@ public class LinearEquationInterface extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        tfObject.setPromptText("未知数个数(1~26)(缺省2)");
+        boxForObjectAmount.setAlignment(Pos.CENTER);
         boxForObjectAmount.getChildren().addAll(tfObject, btContinue);
 
         root.setTop(boxForObjectAmount);
@@ -47,16 +49,36 @@ public class LinearEquationInterface extends Application {
         primaryStage.show();
 
         btContinue.setOnAction(e -> {
-            primaryStage.close();
-            root.setCenter(generateTable(Integer.parseInt(tfObject.getText().trim())));
-            primaryStage.show();
+            if (!tfObject.getText().trim().equals("") && (Integer.parseInt(tfObject.getText().trim()) > 26 || Integer.parseInt(tfObject.getText().trim()) < 1)) {
+                error(new Stage());
+            } else {
+                primaryStage.close();
+                root.setCenter(generateTable(Integer.parseInt(
+                        tfObject.getText().trim().equals("") ? "2"
+                        : tfObject.getText().trim())));
+                primaryStage.show();
+            }
         });
         btSolve.setOnAction(e -> {
             solveEquation();
             primaryStage.close();
-            
+            root.setBottom(solutionTable());
             primaryStage.show();
         });
+        root.requestFocus();
+    }
+
+    private void error(Stage stage) {
+        VBox pane = new VBox(10);
+        pane.setAlignment(Pos.CENTER);
+        Button btOK = new Button("确定");
+        btOK.setOnAction(e -> stage.close());
+        Text t = new Text("输入有误");
+        pane.getChildren().addAll(t, btOK);
+        Scene scene = new Scene(pane, 150, 75);
+        stage.setScene(scene);
+        stage.setTitle("Input Error");
+        stage.show();
     }
 
     private Double[][] constants;
@@ -65,11 +87,12 @@ public class LinearEquationInterface extends Application {
 
     private GridPane generateTable(Integer object) {
         GridPane table = new GridPane();
+        table.setVgap(5);
         table.setAlignment(Pos.CENTER);
         input = new TextField[object][object + 1];
         for (int i = 1; i <= object + 1; i++) {
             table.add(new Text("     " + Character.toString((char) (96 + i))
-                    + (i <= object ? "(x" + i + ")" + (i < object ? " +" : " ==") : "")), i, 0);
+                    + (i <= object ? "(X" + i + ")" + (i < object ? " +" : " ==") : "")), i, 0);
         }
         for (int i = 0; i < object; i++) {
             table.add(new Text(Integer.toString(i + 1)), 0, i + 1);
@@ -86,9 +109,12 @@ public class LinearEquationInterface extends Application {
         return table;
     }
 
-    private VBox solutionTable() {
-        VBox table = new VBox(5);
-
+    private GridPane solutionTable() {
+        GridPane table = new GridPane();
+        for (int i = 1; i < solution.length; i++) {
+            TextField temp = new TextField(String.format("%f", solution[i]));
+            table.addRow(i, new Text("X" + i), temp);
+        }
         return table;
     }
 
