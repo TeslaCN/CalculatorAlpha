@@ -40,7 +40,12 @@ public class Algorithm {
     }
 
     public Double getAnswer() {
-        return solve();
+        Double answer=null;
+        try {
+            answer=solve();
+        } catch (Exception e) {
+        }
+        return answer;
     }
     
     private Double solve() {
