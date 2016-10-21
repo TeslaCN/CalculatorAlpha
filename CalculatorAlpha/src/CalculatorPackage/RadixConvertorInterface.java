@@ -180,6 +180,35 @@ public class RadixConvertorInterface extends Application {
     }
 
     private void setAction() {
+        btAdd.setOnAction(e -> {
+            inputButtonPressed(Config.PLUS);
+        });
+        btSubtract.setOnAction(e -> {
+            inputButtonPressed(Config.SUBSTRAC);
+        });
+        btMultiply.setOnAction(e -> {
+            inputButtonPressed(Config.MULTIPLY);
+        });
+        btDivide.setOnAction(e -> {
+            inputButtonPressed(Config.DIVIDE);
+        });
+        btEquals.setOnAction(e -> {
+            printResult();
+            returnFocus();
+        });
+
+        btPrevious.setOnAction(e -> {
+            returnPrevious();
+            returnFocus();
+        });
+        btNext.setOnAction(e -> {
+            returnNext();
+            returnFocus();
+        });
+        btAC.setOnAction(e -> {
+            allClear();
+            returnFocus();
+        });
 
         expression.setOnKeyPressed(e -> {
             //以下两行代码用于测试键盘输入
@@ -280,6 +309,12 @@ public class RadixConvertorInterface extends Application {
             result.setText(RadixConvertor.getRandomExpression(
                     result.getText(), previousRadix, radix).toUpperCase().trim());
         }
+    }
+
+    private void inputButtonPressed(String object) {
+        handleNewInput();
+        append(object);
+        returnFocus();
     }
 
     private void append(String in) {
