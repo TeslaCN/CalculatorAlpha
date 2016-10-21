@@ -119,6 +119,7 @@ public class LinearEquationInterface extends Application {
         GridPane table = new GridPane();
         for (int i = 1; i < solution.length; i++) {
             TextField temp = new TextField(String.format("%f", solution[i]));
+            temp.setEditable(false);
             table.addRow(i, new Text("X" + i), temp);
         }
         return table;

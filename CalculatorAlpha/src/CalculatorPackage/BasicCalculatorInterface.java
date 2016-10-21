@@ -87,7 +87,7 @@ public class BasicCalculatorInterface extends Application {
         initializeSeniorFunction();
 
         Scene scene = new Scene(root);
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle(Config.TITLE);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

@@ -54,6 +54,8 @@ public class Config {
     public static final String PI = " ¦Ð ";
     public static final String E = " e ";
     
+    public static final String TITLE = "Hello, World! Hello, °¢Ë¾!";
+    
     public static double previousAnswer;
     
     Config() {
