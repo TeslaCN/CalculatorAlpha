@@ -76,8 +76,7 @@ public class RadixConvertor {
     
         public static void main(String args[]){
         String expression = "( 111 + 111010 ) * 110101000 + 10000000000000000000000";
-        expression = getRandomExpression(expression, 10 ,16);
-       // expression = a.RandomConvert(expression,2);
+        expression = getRandomExpression(expression, 10 ,8);
         System.out.println(expression);
     }
 
