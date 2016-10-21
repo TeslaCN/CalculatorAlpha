@@ -76,7 +76,6 @@ public class BasicCalculatorInterface extends Application {
         btSolveEquation.setPrefSize((5 * Config.BUTTON_WIDTH + 4 * Config.BASIC_KEYBOARD_GAP) / 2,
                 Config.BUTTON_HEIGHT);
 
-        
         extraButtonBox.getChildren().addAll(btRadixConverter, btSolveEquation);
 
         display.getChildren().addAll(expression, answer, extraButtonBox);
@@ -112,7 +111,7 @@ public class BasicCalculatorInterface extends Application {
                 returnFocus();
             }
         });
-        
+
         btRadixConverter.setOnAction(e -> {
             new RadixConvertorInterface().start(new Stage());
             returnFocus();
@@ -123,7 +122,7 @@ public class BasicCalculatorInterface extends Application {
         });
 
         answer.focusedProperty().addListener(lv -> {
-            if(answer.isFocused()) {
+            if (answer.isFocused()) {
                 returnFocus();
             }
         });
@@ -327,8 +326,15 @@ public class BasicCalculatorInterface extends Application {
 
     private void printAnswer() {
         ExpressionHandler cal = new ExpressionHandler(expression.getText() + Config.END);
-        answer.setText(String.format("%.10f", cal.getDecimalAnswer()));
-        Config.previousAnswer = cal.getDecimalAnswer();
+        String output = String.format("%.10f", cal.getDecimalAnswer());
+        answer.setText(output.equals("null") ? "表达式有误" : output);
+        try {
+            Config.previousAnswer = cal.getDecimalAnswer();
+        } catch (NullPointerException ex) {
+            Config.previousAnswer = 0;
+            System.out.println("表达式有误");
+            System.out.println(output);
+        }
     }
 
     //清除所有内容

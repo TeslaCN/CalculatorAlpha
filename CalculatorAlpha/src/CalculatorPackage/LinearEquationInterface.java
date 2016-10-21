@@ -36,7 +36,7 @@ public class LinearEquationInterface extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        tfObject.setPromptText("未知数个数(1~26)(缺省2)");
+        tfObject.setPromptText("未知数个数(1~25)(缺省2)");
         boxForObjectAmount.setAlignment(Pos.CENTER);
         boxForObjectAmount.getChildren().addAll(tfObject, btContinue);
 
@@ -50,7 +50,7 @@ public class LinearEquationInterface extends Application {
 
         btContinue.setOnAction(e -> {
             if (!tfObject.getText().trim().equals("")
-                    && (Integer.parseInt(tfObject.getText().trim()) > 26
+                    && (Integer.parseInt(tfObject.getText().trim()) > 25
                     || Integer.parseInt(tfObject.getText().trim()) < 1)) {
                 error(new Stage());
             } else {
@@ -128,11 +128,9 @@ public class LinearEquationInterface extends Application {
         constants = new Double[input.length][input[0].length];
         for (int i = 0; i < constants.length; i++) {
             for (int j = 0; j < constants[i].length; j++) {
-                try {
-                    constants[i][j] = Double.parseDouble(input[i][j].getText().trim());
-                } catch (NumberFormatException ex) {
+                String in = input[i][j].getText().trim();
+                constants[i][j] = Double.parseDouble(in.equals("") ? "0.0" : in);
 
-                }
             }
         }
         solution = new SolutionOfLinearEquations(constants.length, constants).solves.clone();

@@ -291,7 +291,12 @@ public class RadixConvertorInterface extends Application {
         if (radix != 10) {
             object = RadixConvertor.getRandomExpression(object, radix, 10);
         }
-        Long res = new ExpressionHandler(object + Config.END).getDecimalAnswer().longValue();
+        Long res = 0L;
+        try {
+            res = new ExpressionHandler(object + Config.END).getDecimalAnswer().longValue();
+        } catch (NullPointerException ex) {
+            System.out.println("表达式有误");
+        }
         result.setText(radix == 10 ? res.toString()
                 : RadixConvertor.getRandomExpression(res.toString(), 10, radix).toUpperCase());
     }
