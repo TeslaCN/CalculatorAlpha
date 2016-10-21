@@ -83,12 +83,15 @@ public class RadixConvertorInterface extends Application {
         expression.setPrefRowCount(3);
         result.setEditable(false);
         result.setAlignment(Pos.CENTER_RIGHT);
-        
+
         result.focusedProperty().addListener(lv -> {
-            if(result.isFocused()) {
+            if (result.isFocused()) {
                 returnFocus();
             }
         });
+
+        keyboard.addRow(1, btAdd, btSubtract, btMultiply, btDivide, previousNext, btAC);
+        keyboard.setHgap(Config.BASIC_KEYBOARD_GAP);
 
         checkBox.getChildren().addAll(rbBinary, rbOctonary, rbDecimal, rbHexadecimal);
         rbHexadecimal.setToggleGroup(checkBoxGroup);
@@ -149,16 +152,14 @@ public class RadixConvertorInterface extends Application {
 
     private void setDecimalKeyboard() {
         changeRadix(10);
-        keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
             active[i] = i < radix;
         }
-        
+
     }
 
     private void setHexaDecimalKeyboard() {
         changeRadix(16);
-        keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
             active[i] = i < radix;
         }
@@ -166,7 +167,6 @@ public class RadixConvertorInterface extends Application {
 
     private void setOctonaryKeyboard() {
         changeRadix(8);
-        keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
             active[i] = i < radix;
         }
@@ -174,7 +174,6 @@ public class RadixConvertorInterface extends Application {
 
     private void setBinaryKeyboard() {
         changeRadix(2);
-        keyboard.getChildren().removeAll();
         for (int i = 0; i < btNumber.length; i++) {
             active[i] = i < radix;
         }
@@ -293,7 +292,8 @@ public class RadixConvertorInterface extends Application {
             object = RadixConvertor.getRandomExpression(object, radix, 10);
         }
         Long res = new ExpressionHandler(object + Config.END).getDecimalAnswer().longValue();
-        result.setText(radix == 10 ? res.toString() : RadixConvertor.getRandomExpression(res.toString(), 10, radix));
+        result.setText(radix == 10 ? res.toString()
+                : RadixConvertor.getRandomExpression(res.toString(), 10, radix).toUpperCase());
     }
 
     //清除所有内容
