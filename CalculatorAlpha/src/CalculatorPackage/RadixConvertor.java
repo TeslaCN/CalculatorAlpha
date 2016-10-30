@@ -13,7 +13,9 @@ import java.util.Scanner;
  */
 public class RadixConvertor {
     
-
+/**
+ * 将传入表达式中的数值或传入的数值进行二，八，十，十六进制之间的转换   
+ */
  
     public static String RandomConvert(String source, Integer radix, Integer targetradix){
         String convertresult = "";
